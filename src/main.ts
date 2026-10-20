@@ -1,5 +1,6 @@
 import "./style.css";
 import { startSilkCursor } from "./flower-cursor";
+import { startInstallPrompt } from "./install-prompt";
 import { getInitialLocale, isLocale, texts, type Locale, type TextKey } from "./i18n";
 
 type TimerId = "dlc" | "switch";
@@ -100,6 +101,7 @@ function setLocale(next: Locale): void {
   const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
   if (description) description.content = copy.intro;
   update();
+  window.dispatchEvent(new Event("silksong-locale-changed"));
 }
 
 select?.addEventListener("change", () => {
@@ -109,6 +111,7 @@ select?.addEventListener("change", () => {
   catch { /* Non-persistent selection remains functional. */ }
 });
 setLocale(locale);
+startInstallPrompt(() => locale);
 
 function loop(): void {
   update();
