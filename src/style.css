@@ -287,6 +287,6 @@ html[lang^="zh"] .brand-name, html[lang="ja"] .brand-name { letter-spacing: .06e
 .install-card__install { padding: 7px 15px; border: 1px solid #ebce98; border-radius: 8px; background: #e6c48d; color: #091e25; font-weight: 700 !important; }
 .install-card__later { padding: 7px 0; background: transparent; border: 0; color: #b8d8d1; }
 .install-card__close { position: absolute; right: 10px; top: 6px; padding: 0 7px; border: 0; background: transparent; color: #d2e3dc; font-size: 23px !important; }
-@media (max-width: 480px) {
-  .install-card { right: max(10px, env(safe-area-inset-right)); bottom: max(10px, env(safe-area-inset-bottom)); width: min(320px, calc(100vw - 20px)); padding: 15px; }
+@media (max-width: 800px) {
+  .install-card { left: 50%; right: auto; top: 50%; bottom: auto; transform: translate(-50%, -50%); width: min(340px, calc(100vw - 32px)); max-height: min(80dvh, 380px); padding: 16px; }
 }
