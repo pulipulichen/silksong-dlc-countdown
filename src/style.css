@@ -64,7 +64,7 @@ select { font: inherit; }
 .sea-band--mid { height: 68%; animation-duration: 24s; animation-direction: reverse; }
 .sea-band--front { height: 48%; animation-duration: 16s; }
 .horizon { position: absolute; left: 0; bottom: clamp(72px, 12vh, 120px); z-index: 1; width: 200%; height: 56px; pointer-events: none; animation: wave-drift 32s linear infinite; filter: drop-shadow(0 0 8px rgba(120,210,196,.25)); }
-.page { position: relative; z-index: 2; display: grid; grid-template-rows: auto minmax(0,1fr) auto; min-height: 0; height: 100%; padding: clamp(15px,2.3vh,32px) clamp(20px,3.7vw,67px) clamp(13px,2vh,29px); }
+.page { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0,1fr); grid-template-rows: auto minmax(0,1fr) auto; min-height: 0; height: 100%; padding: clamp(15px,2.3vh,32px) clamp(20px,3.7vw,67px) clamp(13px,2vh,29px); }
 
 .topbar { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 15px; min-width: 0; min-height: 44px; }
 .brand { position: relative; display: inline-flex; align-items: center; gap: 10px; min-width: 0; text-decoration: none; color: var(--teal); white-space: nowrap; }
@@ -80,14 +80,14 @@ html[lang^="zh"] .brand-name, html[lang="ja"] .brand-name { letter-spacing: .06e
 .language-picker option { background: #10252b; color: #f4e8d5; }
 .language-picker:focus-within { outline: 1px solid #ffdd9b; outline-offset: 3px; }
 
-.main { width: 100%; max-width: 1190px; min-height: 0; margin: auto; padding-block: clamp(5px,1.3vh,18px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(14px,3vh,37px); }
+.main { min-width: 0; width: 100%; max-width: 1190px; min-height: 0; margin: auto; padding-block: clamp(5px,1.3vh,18px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(14px,3vh,37px); }
 .hero { display: flex; flex-direction: column; align-items: center; width: 100%; min-height: 0; text-align: center; animation: entrance .9s ease-out both; }
 .eyebrow { display: flex; justify-content: center; align-items: center; gap: 14px; color: var(--gold); letter-spacing: .24em; font-weight: 700; font-size: clamp(9px,.85vw,12px); }
 .eyebrow i { width: 5px; height: 5px; flex: 0 0 5px; border: 1px solid currentColor; transform: rotate(45deg); }
 .hero h1 { margin: clamp(10px,1.6vh,18px) 0 0; color: #f9eddb; font: 500 clamp(29px,4.65vw,70px)/1.2 "Cinzel","Noto Sans TC","Noto Sans SC","Noto Sans JP",serif; letter-spacing: -.026em; text-shadow: 0 3px 40px rgba(255,195,121,.16); text-wrap: balance; }
 .hero h1 em { font-style: normal; color: #edcb94; }
 .hero p { max-width: 700px; padding-inline: 10px; margin: clamp(9px,1.45vh,17px) 0 0; font-size: clamp(11px,1vw,15px); color: #bccac2; line-height: 1.7; text-wrap: balance; }
-.cards { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: clamp(11px,1.8vw,25px); width: 100%; min-height: 0; }
+.cards { min-width: 0; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: clamp(11px,1.8vw,25px); width: 100%; min-height: 0; }
 .card { position: relative; min-width: 0; min-height: 0; display: flex; flex-direction: column; padding: clamp(17px,2.25vw,34px); overflow: hidden; border: 1px solid rgba(231,190,128,.32); background: radial-gradient(ellipse 95% 48% at 50% 115%,rgba(89,160,147,.16),transparent 74%),linear-gradient(148deg,rgba(16,40,46,.97),rgba(6,20,28,.98) 70%,rgba(8,28,36,.97)); background-size: 100% 150%,100% 100%; background-position: 50% 100%,center; box-shadow: 0 21px 75px rgba(0,0,0,.26),inset 0 1px rgba(255,255,255,.05); backdrop-filter: blur(12px); transition: transform .35s,border-color .35s,box-shadow .35s; animation: entrance .9s .15s both, surface-drift 14s ease-in-out infinite alternate; }
 .card[hidden] { display: none; }
 .card:hover { transform: translateY(-3px); border-color: rgba(229,201,150,.7); box-shadow: 0 26px 75px rgba(0,0,0,.4),0 0 35px rgba(137,223,202,.07); animation-play-state: paused; }
@@ -149,6 +149,25 @@ html[lang^="zh"] .brand-name, html[lang="ja"] .brand-name { letter-spacing: .06e
 @keyframes digit-tick { from { opacity: .45; transform: translateY(-7px) rotateX(35deg); filter: brightness(1.5); } to { opacity: 1; transform: translateY(0) rotateX(0); filter: brightness(1); } }
 
 @media (max-width: 800px) {
+  /* Let narrow screens scroll vertically instead of clipping content. */
+  html,body,#app { height: auto; min-height: 100%; overflow: visible; }
+  body { overflow-x: clip; overscroll-behavior: auto; }
+  .site-shell { height: auto; min-height: 100vh; min-height: 100dvh; overflow: clip; }
+  .page { height: auto; min-height: 100vh; min-height: 100dvh; grid-template-rows: auto 1fr auto; }
+  .main { margin-block: 0; }
+  .topbar { grid-template-columns: minmax(0,1fr) minmax(0,auto); gap: 8px; }
+  .brand { white-space: normal; }
+  .brand-name { overflow-wrap: anywhere; }
+  .top-actions { min-width: 0; max-width: 100%; }
+  .eyebrow { min-width: 0; max-width: 100%; }
+  .eyebrow span { min-width: 0; overflow-wrap: anywhere; }
+  .cards { grid-template-columns: minmax(0,1fr); }
+  .card h2,.card-description,.reference { overflow-wrap: anywhere; }
+  .reference { max-width: 100%; }
+  .footer { min-width: 0; }
+  .timezone,.footer-credit { min-width: 0; flex-wrap: wrap; white-space: normal; }
+  .timezone strong { overflow-wrap: anywhere; }
+  .footer-credit { justify-content: flex-end; }
   .page { padding: clamp(12px,2vh,20px) clamp(14px,4vw,30px) clamp(10px,1.7vh,18px); }
   .fan-label { display: none; }
   .brand-name { font-size: 12px; letter-spacing: .12em; }
@@ -158,7 +177,7 @@ html[lang^="zh"] .brand-name, html[lang="ja"] .brand-name { letter-spacing: .06e
   .main { gap: clamp(10px,2vh,18px); padding-block: 5px; }
   .hero h1 { font-size: clamp(26px,5.8vw,46px); margin-top: 8px; }
   .hero p { font-size: 11px; max-width: 550px; margin-top: 6px; line-height: 1.5; }
-  .cards { grid-template-columns: 1fr; max-width: 610px; gap: clamp(7px,1.3vh,12px); }
+  .cards { grid-template-columns: minmax(0,1fr); max-width: 610px; gap: clamp(7px,1.3vh,12px); }
   .card { padding: clamp(10px,1.5vh,17px) clamp(15px,3vw,22px); }
   .card h2 { font-size: clamp(15px,3.4vw,22px); margin: 6px 0 2px; }
   .card-kicker { font-size: 9px; }
@@ -171,7 +190,7 @@ html[lang^="zh"] .brand-name, html[lang="ja"] .brand-name { letter-spacing: .06e
   .status { margin-top: clamp(6px,1.1vh,12px); font-size: 9px; letter-spacing: .09em; }
   .card-description { margin-top: 6px; min-height: 0; font-size: 10px; line-height: 1.45; }
   .reference { margin-top: 6px; font-size: 9px; padding-bottom: 1px; }
-  .footer { grid-template-columns: 1fr auto; gap: 4px 8px; }
+  .footer { grid-template-columns: minmax(0,1fr) minmax(0,auto); gap: 4px 8px; }
   .footer p { grid-column: 1 / -1; grid-row: 2; font-size: 9px; }
   .footer-credit { grid-column: 2; grid-row: 1; font-size: 9px; }
   .timezone { gap: 5px; font-size: 9px; }
