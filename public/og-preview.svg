@@ -1,1 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630"><defs><radialGradient id="g"><stop stop-color="#1d5550"/><stop offset="1" stop-color="#061019"/></radialGradient></defs><rect width="1200" height="630" fill="url(#g)"/><circle cx="600" cy="300" r="260" stroke="#d3b179" stroke-opacity=".3" fill="none"/><circle cx="600" cy="300" r="215" stroke="#d3b179" stroke-opacity=".15" fill="none"/><path d="M40 100V40h60M1160 100V40h-60M40 530v60h60M1160 530v60h-60" fill="none" stroke="#dab988" stroke-width="2"/><text x="600" y="205" fill="#e4c18d" font-family="Georgia,serif" font-size="30" letter-spacing="8" text-anchor="middle">THE LONG WAIT</text><text x="600" y="320" fill="#f4e7d4" font-family="Georgia,serif" font-size="75" text-anchor="middle">Two dates.</text><text x="600" y="407" fill="#e4c18d" font-family="Georgia,serif" font-size="72" text-anchor="middle">One hopeful wait.</text><text x="600" y="489" fill="#bedcd2" font-family="Arial,sans-serif" font-size="22" letter-spacing="4" text-anchor="middle">NOV 27 · DEC 31 · 2026</text><text x="600" y="555" fill="#9fb9b1" font-family="Arial,sans-serif" font-size="16" letter-spacing="2" text-anchor="middle">AN UNOFFICIAL SILKSONG DLC FAN COUNTDOWN</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#04141c"/>
+      <stop offset=".62" stop-color="#0a3d48"/>
+      <stop offset="1" stop-color="#062028"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#sea)"/>
+  <path d="M0 150 Q150 120 300 150 T600 150 T900 150 T1200 150" fill="none" stroke="#8fd4c8" stroke-opacity=".35" stroke-width="2"/>
+  <path d="M0 210 Q180 176 360 210 T720 210 T1080 210 T1440 210" fill="none" stroke="#e4c48a" stroke-opacity=".22" stroke-width="1.5"/>
+  <ellipse cx="600" cy="470" rx="460" ry="46" fill="none" stroke="#9fdcd2" stroke-opacity=".28"/>
+  <path d="M40 100V40h60M1160 100V40h-60M40 530v60h60M1160 530v60h-60" fill="none" stroke="#dab988" stroke-width="2"/>
+  <text x="600" y="188" fill="#e4c18d" font-family="Georgia,serif" font-size="26" letter-spacing="7" text-anchor="middle">HOLLOW KNIGHT: SILKSONG</text>
+  <text x="600" y="292" fill="#f4e7d4" font-family="Georgia,serif" font-size="68" text-anchor="middle">Silksong DLC Countdown</text>
+  <text x="600" y="362" fill="#e4c18d" font-family="Georgia,serif" font-size="36" letter-spacing="3" text-anchor="middle">Sea of Sorrow</text>
+  <text x="600" y="438" fill="#bedcd2" font-family="Arial,sans-serif" font-size="22" letter-spacing="4" text-anchor="middle">NOV 27 · DEC 31 · 2026</text>
+  <path d="M0 500 Q150 458 300 500 T600 500 T900 500 T1200 500 V630 H0 Z" fill="#0d4e5c" fill-opacity=".72"/>
+  <path d="M0 548 Q120 512 240 548 T480 548 T720 548 T960 548 T1200 548 V630 H0 Z" fill="#08323c"/>
+  <path d="M0 548 Q120 512 240 548 T480 548 T720 548 T960 548 T1200 548" fill="none" stroke="#9fe0d6" stroke-opacity=".8" stroke-width="3"/>
+</svg>

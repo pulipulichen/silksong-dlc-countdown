@@ -1,4 +1,5 @@
 import "./style.css";
+import { startSilkCursor } from "./flower-cursor";
 import { getInitialLocale, isLocale, texts, type Locale, type TextKey } from "./i18n";
 
 type TimerId = "dlc" | "switch";
@@ -28,6 +29,9 @@ const target: Record<TimerId, number> = {
   dlc: adelaideMidnight(2026, 12, 31),
   switch: adelaideMidnight(2026, 11, 27),
 };
+// Keep the November 27 card through that Adelaide calendar day.
+const switchCardHideAt = adelaideMidnight(2026, 11, 28);
+const switchCard = document.querySelector<HTMLElement>('[data-card="switch"]');
 let locale: Locale = getInitialLocale();
 const select = document.querySelector<HTMLSelectElement>("#locale");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -50,6 +54,7 @@ function changeDigit(element: HTMLElement | null, value: number): void {
 
 function update(): void {
   const now = Date.now();
+  if (switchCard) switchCard.hidden = now >= switchCardHideAt;
   const copy = texts[locale];
   (["dlc", "switch"] as const).forEach((id) => {
     const timer = timers[id];
@@ -117,11 +122,9 @@ function startAmbient(canvas: HTMLCanvasElement): void {
   if (!ctx) return;
 
   type Particle = { x: number; y: number; radius: number; speed: number; phase: number; gold: boolean };
-  type Spark = { x: number; y: number; dx: number; dy: number; life: number };
   type Ripple = { x: number; y: number; age: number };
   let width = 0, height = 0;
   let particles: Particle[] = [];
-  let sparks: Spark[] = [];
   let ripples: Ripple[] = [];
   let raf = 0;
   let pointerX = 0, pointerY = 0;
@@ -152,22 +155,43 @@ function startAmbient(canvas: HTMLCanvasElement): void {
     easedX += (pointerX - easedX) * .025;
     easedY += (pointerY - easedY) * .025;
 
-    // Slow, layered swell lines give the scene a quiet underwater current.
-    for (let layer = 0; layer < 5; layer++) {
-      const baseline = height * (.55 + layer * .105);
-      const amplitude = 8 + layer * 3;
-      const phase = seconds * (.24 + layer * .025) + layer * 1.7;
+    const swell = (x: number, baseline: number, amplitude: number, phase: number): number =>
+      baseline
+      + Math.sin(x * 0.0075 + phase) * amplitude
+      + Math.sin(x * 0.018 - phase * 0.65) * amplitude * 0.34;
+
+    for (let layer = 0; layer < 3; layer++) {
+      const baseline = height * (0.06 + layer * 0.1);
+      const amplitude = 12 + layer * 5;
+      const phase = seconds * (0.22 + layer * 0.04) + layer;
       ctx.beginPath();
-      for (let x = -20; x <= width + 20; x += 8) {
-        const y = baseline + Math.sin(x * .009 + phase) * amplitude
-          + Math.sin(x * .021 - phase * .7) * amplitude * .32;
-        if (x === -20) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      for (let x = 0; x <= width; x += 12) {
+        const y = swell(x, baseline, amplitude, phase);
+        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
       }
-      const fade = Math.max(.008, .042 - layer * .005);
-      ctx.strokeStyle = layer % 2
-        ? `rgba(111,205,192,${fade})`
-        : `rgba(231,194,137,${fade})`;
-      ctx.lineWidth = layer === 0 ? 1.2 : .8;
+      ctx.strokeStyle = `rgba(176,228,220,${0.14 + layer * 0.05})`;
+      ctx.lineWidth = 1.15;
+      ctx.stroke();
+    }
+
+    for (let layer = 0; layer < 3; layer++) {
+      const baseline = height * (0.56 + layer * 0.13);
+      const amplitude = 22 + layer * 7;
+      const phase = seconds * (0.32 + layer * 0.06) + layer * 1.4;
+      ctx.beginPath();
+      ctx.moveTo(0, height);
+      for (let x = 0; x <= width; x += 12) ctx.lineTo(x, swell(x, baseline, amplitude, phase));
+      ctx.lineTo(width, height);
+      ctx.closePath();
+      ctx.fillStyle = layer % 2 ? "rgba(56,150,156,0.07)" : "rgba(20,96,114,0.09)";
+      ctx.fill();
+      ctx.beginPath();
+      for (let x = 0; x <= width; x += 12) {
+        const y = swell(x, baseline, amplitude, phase);
+        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = layer === 2 ? "rgba(214,190,132,0.28)" : "rgba(198,240,230,0.34)";
+      ctx.lineWidth = 1.5;
       ctx.stroke();
     }
 
@@ -200,14 +224,6 @@ function startAmbient(canvas: HTMLCanvasElement): void {
       }
     }
 
-    for (const s of sparks) {
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, Math.max(.1, s.life / 34), 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(247,208,144," + Math.max(0, s.life / 75).toFixed(3) + ")";
-      ctx.fill();
-      s.x += s.dx; s.y += s.dy; s.dx *= .98; s.dy *= .98; s.life -= 1.1;
-    }
-    sparks = sparks.filter((s) => s.life > 0);
     if (!reduceMotion.matches && !document.hidden) raf = requestAnimationFrame(draw);
   }
 
@@ -226,18 +242,9 @@ function startAmbient(canvas: HTMLCanvasElement): void {
     document.documentElement.style.setProperty("--my", String(event.clientY / height - .5));
   }, { passive: true });
   window.addEventListener("pointerdown", (event) => {
-    if (reduceMotion.matches) return;
+    if (reduceMotion.matches || !event.isPrimary || event.button !== 0) return;
     ripples.push({ x: event.clientX, y: event.clientY, age: 0 });
-    if (sparks.length > 50) return;
-    for (let i = 0; i < 10; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const speed = .6 + Math.random() * 1.8;
-      sparks.push({
-        x: event.clientX, y: event.clientY,
-        dx: Math.cos(angle) * speed, dy: Math.sin(angle) * speed,
-        life: 25 + Math.random() * 35,
-      });
-    }
+    if (ripples.length > 8) ripples.shift();
   }, { passive: true });
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) cancelAnimationFrame(raf); else restart();
@@ -248,3 +255,4 @@ function startAmbient(canvas: HTMLCanvasElement): void {
 
 const canvas = document.querySelector<HTMLCanvasElement>("#ambient");
 if (canvas) startAmbient(canvas);
+startSilkCursor(reduceMotion);

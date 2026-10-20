@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="56" viewBox="0 0 96 112" fill="none">
+  <defs>
+    <clipPath id="silhouette">
+      <path d="M49 7C58 17 68 35 70 55C73 77 61 98 48 105C35 97 24 78 26 58C27 38 38 17 49 7Z"/>
+    </clipPath>
+  </defs>
+  <g transform="rotate(7 48 56)">
+    <path d="M49 9C58 20 66 37 68 56C70 76 60 96 48 103C36 95 26 77 28 58C29 39 39 19 49 9Z" fill="#b5cdc8" fill-opacity=".24"/>
+    <g clip-path="url(#silhouette)" stroke-linecap="round">
+      <g stroke="#c7d8d2" stroke-width="1.8" opacity=".65">
+        <path d="M37 12Q49 8 59 15M32 20Q48 15 65 24M29 27Q48 23 68 32M25 35Q46 30 72 40M23 43Q48 38 74 49M22 51Q46 47 74 56M22 60Q47 53 75 65M24 68Q48 62 74 73M25 77Q48 72 71 81M28 85Q46 79 68 90M33 94Q47 88 62 97M40 102Q47 97 55 105"/>
+      </g>
+      <g stroke="#f5f5ea" stroke-width="2.1">
+        <path d="M39 11Q48 13 57 11M37 16Q48 14 61 18M33 21Q47 24 64 20M31 25Q49 21 66 28M30 30Q48 34 68 29M27 34Q47 29 70 37M26 39Q47 43 71 38M25 43Q48 37 73 46M24 48Q46 52 74 47M23 52Q47 46 74 55M23 57Q46 62 75 56M24 62Q47 55 74 65M24 67Q48 72 74 66M25 72Q49 65 73 75M27 77Q47 82 71 76M29 82Q47 75 69 85M31 87Q48 91 66 86M34 92Q48 86 63 95M38 97Q47 101 59 96M43 102Q48 98 54 104"/>
+      </g>
+      <g stroke="#fffef5" stroke-width="1.1" opacity=".85">
+        <path d="M32 23Q49 27 64 34M27 37Q49 44 71 45M25 50Q48 55 73 63M26 65Q46 69 69 79M31 82Q48 85 62 94M34 30Q51 31 66 25M28 47Q50 45 71 37M25 64Q47 60 73 51M29 80Q49 76 70 67M37 96Q51 91 65 83"/>
+      </g>
+    </g>
+    <g stroke="#edf3e9" stroke-width="1" stroke-linecap="round" opacity=".45">
+      <path d="M45 10Q48 5 52 7M38 19Q45 15 55 18M29 35Q35 32 42 33M23 56Q31 52 38 54M60 47Q68 48 73 52M59 73Q67 74 72 77M29 80Q35 81 40 84M43 103Q49 108 53 102"/>
+    </g>
+  </g>
+</svg>
