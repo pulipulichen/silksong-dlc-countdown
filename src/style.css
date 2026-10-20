@@ -269,3 +269,24 @@ html[lang^="zh"] .brand-name, html[lang="ja"] .brand-name { letter-spacing: .06e
   *,*::before,*::after { animation: none !important; transition: none !important; }
   .card:hover { transform: none; }
 }
+
+
+/* Browser-controlled PWA install invitation; never covers the whole viewport. */
+.install-card {
+  position: fixed; z-index: 1100; right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom)); width: min(340px, calc(100vw - 32px));
+  max-height: min(75dvh, 380px); overflow-y: auto; padding: 20px 18px 16px;
+  color: #f4e9d8; background: linear-gradient(145deg, #12353b, #071920);
+  border: 1px solid rgba(233,196,140,.65); border-radius: 14px;
+  box-shadow: 0 14px 45px rgba(0,0,0,.55); font-size: 13px; line-height: 1.6;
+}
+.install-card__title { display: block; padding-right: 24px; color: #f2d49f; font-size: 15px; }
+.install-card p { margin: 8px 0 14px; color: #c4d9d1; }
+.install-card__actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.install-card button { font: inherit; cursor: pointer; }
+.install-card__install { padding: 7px 15px; border: 1px solid #ebce98; border-radius: 8px; background: #e6c48d; color: #091e25; font-weight: 700 !important; }
+.install-card__later { padding: 7px 0; background: transparent; border: 0; color: #b8d8d1; }
+.install-card__close { position: absolute; right: 10px; top: 6px; padding: 0 7px; border: 0; background: transparent; color: #d2e3dc; font-size: 23px !important; }
+@media (max-width: 480px) {
+  .install-card { right: max(10px, env(safe-area-inset-right)); bottom: max(10px, env(safe-area-inset-bottom)); width: min(320px, calc(100vw - 20px)); padding: 15px; }
+}
