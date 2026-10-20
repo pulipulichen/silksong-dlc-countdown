@@ -1,0 +1,41 @@
+---
+description: Use Monday-based weekly CHANGELOG files instead of semantic versions
+globs: changelog/**,CHANGELOG.md
+alwaysApply: false
+---
+
+# Weekly CHANGELOG Rules
+
+## Period and File Naming
+
+- Do not use semantic version numbers such as `0.0.28` to identify new CHANGELOG files.
+- Each week starts at 00:00 on Monday and ends at 23:59 on Sunday in the **Asia/Taipei** time zone.
+- Name each file using the date of that week's Monday: `changelog/CHANGELOG-YYYY.M.DD.md`.
+- The month in `YYYY.M.DD` does not need a leading zero; follow existing project examples, such as `2026.8.31`.
+- Define the week number as the ordinal number of that Monday within its month, and write it in the title as "Week 1", "Week 2", and so on.
+- For example, August 31, 2026 is a Monday and the fifth Monday of August, so the file should be named `changelog/CHANGELOG-2026.8.31.md`, with a title such as `2026.8.31 (Week 5)`.
+- If a week spans two months, use the Monday's date and month to determine the file name and week number. Do not split the week across files.
+
+## Writing and Creating Files
+
+- When there are changes worth recording, add them to the weekly file for the period in which they occurred; the user does not need to separately request a CHANGELOG update.
+- Create a weekly file only if one does not already exist. Use a new file named for the Monday date when a new week begins.
+- Add multiple changes from the same week to the same file. Do not create separate files based on feature size, number of completions, or number of commits.
+- Use the existing change categories in weekly files, such as `Added`, `Changed`, `Improved`, `Fixed`, `Removed`, and `Documentation`.
+- Do not create an empty weekly file when there are no changes worth recording.
+
+## Backward Compatibility and Root Index
+
+- Treat existing semantic-version files such as `CHANGELOG-0.0.x.md` as historical records. Keep their names and contents by default; do not rename, merge, or move them.
+- Use period-based wording such as `Latest Week` for the latest section in the root [`CHANGELOG.md`](CHANGELOG.md), and link it to the current weekly file. List existing semantic versions separately as historical versions.
+- Unless the user explicitly requests it, do not create a new semantic-version CHANGELOG, bump a version, update the semantic-version index, or move old files into an archive.
+- If the user explicitly specifies a semantic version number (for example, `0.0.29`), that request overrides the weekly-file rule for that task. Create the specified version file and update the index.
+
+```text
+✅ Changes from Monday, 2026.8.31 through Sunday, 2026.9.6 → add to CHANGELOG-2026.8.31.md
+✅ Changes from Monday, 2026.9.7 onward → create or update CHANGELOG-2026.9.7.md
+✅ Multiple features completed in the same week → add all of them to the same weekly file
+❌ Create CHANGELOG-0.0.29.md because a feature is significant
+❌ Rename the existing CHANGELOG-0.0.28.md or move it into an archive
+❌ Split the week of 2026.8.31 across files because it spans two months
+```

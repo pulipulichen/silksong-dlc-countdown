@@ -118,9 +118,11 @@ function startAmbient(canvas: HTMLCanvasElement): void {
 
   type Particle = { x: number; y: number; radius: number; speed: number; phase: number; gold: boolean };
   type Spark = { x: number; y: number; dx: number; dy: number; life: number };
+  type Ripple = { x: number; y: number; age: number };
   let width = 0, height = 0;
   let particles: Particle[] = [];
   let sparks: Spark[] = [];
+  let ripples: Ripple[] = [];
   let raf = 0;
   let pointerX = 0, pointerY = 0;
   let easedX = 0, easedY = 0;
@@ -150,15 +152,35 @@ function startAmbient(canvas: HTMLCanvasElement): void {
     easedX += (pointerX - easedX) * .025;
     easedY += (pointerY - easedY) * .025;
 
-    // Decorative, diffuse celestial arcs (not visual elements from the game).
-    for (let ring = 0; ring < 3; ring++) {
-      const r = Math.min(width * .37, height * .58) + ring * 58;
+    // Slow, layered swell lines give the scene a quiet underwater current.
+    for (let layer = 0; layer < 5; layer++) {
+      const baseline = height * (.55 + layer * .105);
+      const amplitude = 8 + layer * 3;
+      const phase = seconds * (.24 + layer * .025) + layer * 1.7;
       ctx.beginPath();
-      ctx.ellipse(width * .5 + easedX * .5, height * .3 + easedY * .5,
-        r, r * .55, -.18, .15, Math.PI * 1.84);
-      ctx.strokeStyle = ring ? "rgba(105,198,175,.047)" : "rgba(233,193,123,.073)";
-      ctx.lineWidth = ring ? 0.8 : 1.3;
+      for (let x = -20; x <= width + 20; x += 8) {
+        const y = baseline + Math.sin(x * .009 + phase) * amplitude
+          + Math.sin(x * .021 - phase * .7) * amplitude * .32;
+        if (x === -20) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      const fade = Math.max(.008, .042 - layer * .005);
+      ctx.strokeStyle = layer % 2
+        ? `rgba(111,205,192,${fade})`
+        : `rgba(231,194,137,${fade})`;
+      ctx.lineWidth = layer === 0 ? 1.2 : .8;
       ctx.stroke();
+    }
+
+    ripples = ripples.filter((ripple) => ripple.age < 1);
+    for (const ripple of ripples) {
+      const progress = ripple.age;
+      const radius = 14 + progress * Math.min(width, height) * .22;
+      ctx.beginPath();
+      ctx.ellipse(ripple.x, ripple.y, radius, radius * .28, 0, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(164,224,211,${(1 - progress) * .2})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ripple.age += .009;
     }
 
     for (const p of particles) {
@@ -204,7 +226,9 @@ function startAmbient(canvas: HTMLCanvasElement): void {
     document.documentElement.style.setProperty("--my", String(event.clientY / height - .5));
   }, { passive: true });
   window.addEventListener("pointerdown", (event) => {
-    if (reduceMotion.matches || sparks.length > 50) return;
+    if (reduceMotion.matches) return;
+    ripples.push({ x: event.clientX, y: event.clientY, age: 0 });
+    if (sparks.length > 50) return;
     for (let i = 0; i < 10; i++) {
       const angle = Math.random() * Math.PI * 2;
       const speed = .6 + Math.random() * 1.8;

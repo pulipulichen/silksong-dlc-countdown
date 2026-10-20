@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeSubmitPrompt": [
+      {
+        "command": "python3 .cursor/hooks/thread-status.py"
+      }
+    ],
+    "stop": [
+      {
+        "command": "python3 .cursor/hooks/thread-status.py"
+      }
+    ]
+  }
+}
