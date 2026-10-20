@@ -6,10 +6,10 @@ type InstallPromptEvent = Event & {
 };
 
 const labels: Record<Locale, { title: string; description: string; install: string; later: string; close: string; ios: string }> = {
-  en: { title: "Install Silksong Countdown", description: "Keep the countdown on your home screen.", install: "Install now", later: "Maybe later", close: "Close", ios: "In Safari, tap Share, then Add to Home Screen." },
-  "zh-TW": { title: "安裝絲綢之歌倒數", description: "將倒數計時器加入主畫面，隨時查看。", install: "立即安裝", later: "稍後再說", close: "關閉", ios: "請在 Safari 點選「分享」，再選擇「加入主畫面」。" },
-  "zh-CN": { title: "安装丝之歌倒计时", description: "将倒计时添加到主屏幕，随时查看。", install: "立即安装", later: "稍后再说", close: "关闭", ios: "请在 Safari 点击“分享”，再选择“添加到主屏幕”。" },
-  ja: { title: "シルクソング カウントダウンをインストール", description: "カウントダウンをホーム画面に追加。", install: "インストール", later: "後で", close: "閉じる", ios: "Safari の共有メニューから「ホーム画面に追加」を選んでください。" },
+  en: { title: "Install Silksong DLC Countdown", description: "Keep the countdown on your home screen.", install: "Install now", later: "Maybe later", close: "Close", ios: "In Safari, tap Share, then Add to Home Screen." },
+  "zh-TW": { title: "安裝絲綢之歌DLC倒數", description: "將倒數計時器加入主畫面，隨時查看。", install: "立即安裝", later: "稍後再說", close: "關閉", ios: "請在 Safari 點選「分享」，再選擇「加入主畫面」。" },
+  "zh-CN": { title: "安装丝之歌DLC倒计时", description: "将倒计时添加到主屏幕，随时查看。", install: "立即安装", later: "稍后再说", close: "关闭", ios: "请在 Safari 点击“分享”，再选择“添加到主屏幕”。" },
+  ja: { title: "シルクソング DLC カウントダウンをインストール", description: "カウントダウンをホーム画面に追加。", install: "インストール", later: "後で", close: "閉じる", ios: "Safari の共有メニューから「ホーム画面に追加」を選んでください。" },
 };
 const snoozeKey = "silksong-install-snooze-until";
 const day = 24 * 60 * 60 * 1000;
