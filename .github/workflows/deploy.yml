@@ -43,6 +43,17 @@ jobs:
           find dist/assets -type f -name '*.css' -print -quit | grep -q .
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
+      - name: Require Actions-only Pages publishing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          build_type="$(gh api "repos/${GITHUB_REPOSITORY}/pages" --jq '.build_type')"
+          if [[ "$build_type" != "workflow" ]]; then
+            echo "::error::Set Settings > Pages > Build and deployment > Source to GitHub Actions. Branch publishing can overwrite the compiled site with unbuilt source files."
+            exit 1
+          fi
       - name: Upload compiled site to GitHub Pages
         uses: actions/upload-pages-artifact@v4
         with:

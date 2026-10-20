@@ -1,6 +1,8 @@
 # 2026.10.19 (Week 3)
 
 ## Fixed
+- Switched GitHub Pages to Actions-only publishing to stop the built-in Jekyll deployment from overwriting Vite output, restoring the favicon and compiled application assets.
+- Added a deployment-source check that fails with an actionable message if Pages is changed back to branch publishing.
 - Made everbloom clicks burst immediately: start with visible white particles around the flower, synchronize animations to pointerdown, and replace the delayed glow buildup with a brief fading flash.
 - Standardized the Traditional Chinese game title as 「絲綢之歌」 across the brand, hero, introduction, and browser title.
 - Removed “another” wording from the first countdown card’s Chinese and Japanese labels to match its position before the year-end countdown.
