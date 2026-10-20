@@ -106,10 +106,9 @@ html[lang^="zh"] .brand-name, html[lang="ja"] .brand-name { letter-spacing: .06e
 .card-kicker::before { content: ""; display: inline-block; width: 5px; height: 5px; flex: 0 0 5px; border-radius: 50%; background: currentColor; box-shadow: 0 0 9px currentColor; }
 .card--teal .card-kicker { color: var(--teal); }
 .card h2 { color: #f3e9d9; margin: clamp(13px,2vh,20px) 0 5px; font: 600 clamp(17px,1.7vw,27px)/1.38 "Cinzel","Noto Sans TC","Noto Sans SC","Noto Sans JP",serif; }
-.card-date { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 9px; color: #a5bab4; font-size: clamp(10px,.95vw,13px); }
-.card-date strong { font: 600 clamp(11px,.99vw,15px) "Cinzel",serif; letter-spacing: .09em; color: var(--gold); }
-.card--teal .card-date strong { color: var(--teal); }
-.card-date > span:nth-child(2) { color: #63817d; }
+.card h2 time { color: var(--gold); font: 600 clamp(13px,1.35vw,20px)/1.38 "Cinzel",serif; font-variant-numeric: tabular-nums lining-nums; white-space: nowrap; }
+.card--teal h2 time { color: var(--teal); }
+.card-date { margin: 0; color: #a5bab4; font-size: clamp(10px,.95vw,13px); }
 
 .timer { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr); align-items: start; gap: clamp(1px,.45vw,8px); margin-top: clamp(11px,1.7vh,18px); padding: clamp(13px,2vh,23px) 0 clamp(10px,1.5vh,19px); border-top: 1px solid rgba(215,201,166,.15); border-bottom: 1px solid rgba(215,201,166,.15); container-type: inline-size; }
 .unit { min-width: 0; display: flex; align-items: center; flex-direction: column; }
@@ -124,7 +123,7 @@ html[lang^="zh"] .brand-name, html[lang="ja"] .brand-name { letter-spacing: .06e
 .card--teal .status { color: #a0d6cb; }
 .card[data-expired="true"] .status { color: #f1d390; }
 .card-description { margin: clamp(13px,2vh,23px) 0 0; color: #b4c5bf; font-size: clamp(11px,.92vw,13px); line-height: 1.65; min-height: 3.25em; }
-.reference { display: inline-block; align-self: flex-start; margin-top: clamp(8px,1.55vh,16px); padding-bottom: 3px; border-bottom: 1px solid rgba(233,190,127,.34); color: var(--gold); text-decoration: none; letter-spacing: .12em; font-size: clamp(9px,.78vw,11px); font-weight: 700; }
+.reference { display: inline-block; align-self: flex-end; text-align: right; margin-top: clamp(8px,1.55vh,16px); padding-bottom: 3px; border-bottom: 1px solid rgba(233,190,127,.34); color: var(--gold); text-decoration: none; letter-spacing: .12em; font-size: clamp(9px,.78vw,11px); font-weight: 700; }
 .card--teal .reference { color: var(--teal); border-color: rgba(136,213,201,.35); }
 .reference:hover { color: #fff7e9; border-bottom-color: currentColor; }
 .card--teal .reference:hover { color: #e7fff7; }
@@ -163,8 +162,8 @@ html[lang^="zh"] .brand-name, html[lang="ja"] .brand-name { letter-spacing: .06e
   .card { padding: clamp(10px,1.5vh,17px) clamp(15px,3vw,22px); }
   .card h2 { font-size: clamp(15px,3.4vw,22px); margin: 6px 0 2px; }
   .card-kicker { font-size: 9px; }
-  .card-date { font-size: 10px; gap: 6px; }
-  .card-date strong { font-size: 11px; }
+  .card-date { font-size: 10px; }
+  .card h2 time { font-size: clamp(12px,2.6vw,17px); }
   .timer { margin-top: 6px; padding: clamp(6px,1vh,10px) 0 5px; }
   .digit { font-size: clamp(22px,7cqw,42px); }
   .timer b { font-size: clamp(17px,5cqw,26px); }

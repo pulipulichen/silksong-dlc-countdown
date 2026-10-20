@@ -23,6 +23,8 @@
 - Redrew the header shell marks and favicon as an asymmetric spiny conch with layered spiral ridges, based on a photo reference.
 - Made the language selector narrower with tighter spacing and a subtler border, and kept it inside the page frame.
 - Removed the wave crests inside both countdown cards while keeping the outer background waves.
+- Placed each numeric countdown date directly after its card title with a colon separator, retaining teal/gold date colors, adding localized release-date wording to the Switch 2 physical edition title, and keeping retailer/fan-date caveats below.
+- Right-aligned both card reference links.
 
 ## Changed
 - Replaced the reference-inspired flower cursor with an abstract, flat-color silk cocoon: separated ivory and mint ribbon shapes, no flower imagery, outlines, or gradients; retained immediate white click flashes and particle bursts.
