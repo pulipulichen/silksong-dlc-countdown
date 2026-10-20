@@ -4,8 +4,9 @@
 - Corrected relative asset references for GitHub Pages so the stylesheet, application script, and favicon load from the project site path.
 
 ## Improved
-- Updated the browser page title in English, Traditional Chinese, Simplified Chinese, and Japanese to clearly identify the Silksong DLC countdown.
+- Updated browser and social-share titles to clearly identify the *Sea of Sorrow* / Silksong DLC countdown, with localized browser titles.
 - Refocused the hero copy and Traditional Chinese localization on the *Sea of Sorrow* DLC countdown.
+- Added a subtle animated underwater-surface effect to countdown cards.
 
 ## Added
 - Added a Cursor hook to track active project conversations, with tests for lifecycle handling, cleanup, concurrency, and status output.
