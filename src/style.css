@@ -152,7 +152,8 @@ html[lang^="zh"] .brand-name, html[lang="ja"] .brand-name { letter-spacing: .06e
   /* Let narrow screens scroll vertically instead of clipping content. */
   html,body,#app { height: auto; min-height: 100%; overflow: visible; }
   body { overflow-x: clip; overscroll-behavior: auto; }
-  .site-shell { height: auto; min-height: 100vh; min-height: 100dvh; overflow: clip; }
+  /* Outrank #app above so decorative overflow cannot extend the page. */
+  #app.site-shell { height: auto; min-height: 100vh; min-height: 100dvh; overflow: clip; }
   .page { height: auto; min-height: 100vh; min-height: 100dvh; grid-template-rows: auto 1fr auto; }
   .main { margin-block: 0; }
   .topbar { grid-template-columns: minmax(0,1fr) minmax(0,auto); gap: 8px; }

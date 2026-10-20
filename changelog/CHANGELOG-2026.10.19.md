@@ -1,6 +1,7 @@
 # 2026.10.19 (Week 3)
 
 ## Fixed
+- Corrected the mobile page wrapper’s selector specificity so off-screen background decorations are clipped instead of creating a long empty scroll area below the footer.
 - Switched GitHub Pages to Actions-only publishing to stop the built-in Jekyll deployment from overwriting Vite output, restoring the favicon and compiled application assets.
 - Added a deployment-source check that fails with an actionable message if Pages is changed back to branch publishing.
 - Made everbloom clicks burst immediately: start with visible white particles around the flower, synchronize animations to pointerdown, and replace the delayed glow buildup with a brief fading flash.
