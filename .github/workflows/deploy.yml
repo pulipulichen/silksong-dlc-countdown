@@ -16,23 +16,38 @@ concurrency:
 
 jobs:
   deploy:
+    name: Build and publish static site
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node.js on GitHub runner
+        uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Install dependencies
+      - name: Install dependencies on GitHub runner
         run: npm install --no-audit --no-fund
-      - name: Build
+      - name: Compile TypeScript and build production site
         run: npm run build
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v4
+      - name: Verify production output
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s dist/index.html
+          test -s dist/og-preview.png
+          test -s dist/favicon.svg
+          find dist/assets -type f -name '*.js' -print -quit | grep -q .
+          find dist/assets -type f -name '*.css' -print -quit | grep -q .
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload compiled site to GitHub Pages
+        uses: actions/upload-pages-artifact@v4
         with:
           path: dist
           retention-days: 3
-      - id: deployment
+      - name: Deploy compiled site
+        id: deployment
         uses: actions/deploy-pages@v4
