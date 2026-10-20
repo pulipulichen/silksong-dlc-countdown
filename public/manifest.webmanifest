@@ -1,0 +1,19 @@
+{
+  "id": "/silksong-dlc-countdown/",
+  "name": "Silksong DLC Countdown — Sea of Sorrow",
+  "short_name": "Sea of Sorrow",
+  "description": "Unofficial fan countdown for Hollow Knight: Silksong's Sea of Sorrow DLC.",
+  "start_url": "/silksong-dlc-countdown/",
+  "scope": "/silksong-dlc-countdown/",
+  "display": "standalone",
+  "background_color": "#061117",
+  "theme_color": "#061117",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

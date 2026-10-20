@@ -15,6 +15,12 @@ A full-screen animated, multilingual **unofficial fan countdown** for two dates 
 
 Both counters use the IANA **Australia/Adelaide** time zone, including daylight saving. When a date passes, its timer displays an arrival message and counts **up** (days / hours / minutes / seconds).
 
+## Installable PWA (online only)
+
+This site provides a web app manifest and an installable standalone experience in compatible browsers. On Android, use the browser's **Install app** or **Add to Home screen** action; on iOS, use Safari's **Add to Home Screen**. Installation support varies by browser.
+
+**An internet connection is required.** This project intentionally does **not** register a service worker or use Workbox, offline precaching, or an offline fallback. The browser may still use its ordinary HTTP cache; this is not an offline-first application. The app's manifest is scoped to the GitHub Pages project subpath.
+
 ## Features
 
 - Single-screen responsive desktop/mobile layout without document scrolling.
