@@ -40,3 +40,6 @@
 - Added an original, reference-inspired everbloom SVG mouse cursor with layered ivory petals, a white click glow, and white particle bursts above page content; preserved native touch behavior and reduced-motion support.
 - Added a Cursor hook to track active project conversations, with tests for lifecycle handling, cleanup, concurrency, and status output.
 - Added project guidance for weekly changelog updates and a reusable GitHub synchronization workflow.
+
+## Fixed
+- Generate 192/512 PNG PWA icons, a padded 512 maskable icon, and the missing 180 Apple touch icon from the existing shell SVG during GitHub Actions builds; update manifest icon entries and validate generated PNG dimensions before deployment.

@@ -39,6 +39,7 @@ jobs:
           test -s dist/index.html
           test -s dist/og-preview.png
           test -s dist/favicon.svg
+          node scripts/verify-icons.mjs
           find dist/assets -type f -name '*.js' -print -quit | grep -q .
           find dist/assets -type f -name '*.css' -print -quit | grep -q .
       - name: Configure GitHub Pages
