@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#061117" />
+  <meta name="description" content="An unofficial fan countdown to two dates surrounding the Sea of Sorrow DLC. Both dates are speculation, not confirmed DLC release dates." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="The Long Wait — Two Dates. One Hope." />
+  <meta property="og:description" content="An unofficial Silksong DLC fan countdown. Adelaide time. Two dates to watch." />
+  <meta property="og:url" content="https://pulipulichen.github.io/silksong-dlc-countdown/" />
+  <meta property="og:image" content="https://pulipulichen.github.io/silksong-dlc-countdown/og-preview.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="/silksong-dlc-countdown/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600&display=swap" rel="stylesheet" />
+  <title>The Long Wait — Fan Countdown</title>
+</head>
+<body>
+<div id="app" class="site-shell">
+  <canvas id="ambient" aria-hidden="true"></canvas>
+  <div class="atmosphere atmosphere--left" aria-hidden="true"></div>
+  <div class="atmosphere atmosphere--right" aria-hidden="true"></div>
+  <div class="halo halo--outer" aria-hidden="true"></div>
+  <div class="halo halo--inner" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="page">
+    <header class="topbar">
+      <a href="https://github.com/pulipulichen/silksong-dlc-countdown" class="brand" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
+        <span class="brand-mark" aria-hidden="true"><span></span></span>
+        <span class="brand-name">THE LONG WAIT</span>
+      </a>
+      <div class="top-actions">
+        <span class="fan-label" data-i18n="fan">AN UNOFFICIAL FAN TRIBUTE</span>
+        <label class="language-picker">
+          <span class="sr-only" data-i18n="language">Choose language</span>
+          <span aria-hidden="true">◎</span>
+          <select id="locale" aria-label="Choose language">
+            <option value="en">English</option>
+            <option value="zh-TW">繁體中文</option>
+            <option value="zh-CN">简体中文</option>
+            <option value="ja">日本語</option>
+          </select>
+          <span aria-hidden="true">⌄</span>
+        </label>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="eyebrow"><i></i><span data-i18n="eyebrow">A COUNTDOWN BENEATH THE SURFACE</span><i></i></div>
+        <h1 id="hero-title"><span data-i18n="heroStart">Two dates.</span> <em data-i18n="heroEnd">One hopeful wait.</em></h1>
+        <p data-i18n="intro">Two moments on the horizon, and a little hope between them. Neither is a confirmed DLC release date.</p>
+        <div class="ornament" aria-hidden="true"><span></span>✧<span></span></div>
+      </section>
+      <div class="cards">
+        <section class="card card--gold" data-card="dlc" aria-labelledby="dlc-title">
+          <div class="card-light" aria-hidden="true"></div>
+          <div class="card-top"><span class="card-kicker" data-i18n="dlcKicker">THE YEAR-END HORIZON</span><span class="card-number">01 / 02</span></div>
+          <h2 id="dlc-title" data-i18n="dlcTitle">Sea of Sorrow — DLC Watch</h2>
+          <p class="card-date"><strong>DEC 31, 2026</strong><span>/</span><span data-i18n="dlcDateNote">fan-chosen year-end marker</span></p>
+          <div class="timer" data-timer="dlc" role="group" aria-label="Time to December 31, 2026 in Adelaide">
+            <div class="unit"><span data-unit="days" class="digit">00</span><span class="unit-label" data-i18n="days">DAYS</span></div><b>:</b>
+            <div class="unit"><span data-unit="hours" class="digit">00</span><span class="unit-label" data-i18n="hours">HOURS</span></div><b>:</b>
+            <div class="unit"><span data-unit="minutes" class="digit">00</span><span class="unit-label" data-i18n="minutes">MINS</span></div><b>:</b>
+            <div class="unit"><span data-unit="seconds" class="digit">00</span><span class="unit-label" data-i18n="seconds">SECS</span></div>
+          </div>
+          <p class="status" data-status="dlc">COUNTING TOWARD THE DATE</p>
+          <p class="card-description" data-i18n="dlcDescription">Team Cherry announced a free DLC for 2026. December 31 is a fan-selected marker, not an official release date.</p>
+          <a class="reference" href="https://youtu.be/qDFEeeLy6ws?t=28" target="_blank" rel="noopener noreferrer" data-i18n="teaser">WATCH THE DLC TEASER ↗</a>
+        </section>
+
+        <section class="card card--teal" data-card="switch" aria-labelledby="switch-title">
+          <div class="card-light" aria-hidden="true"></div>
+          <div class="card-top"><span class="card-kicker" data-i18n="switchKicker">AN EARLIER POSSIBILITY</span><span class="card-number">02 / 02</span></div>
+          <h2 id="switch-title" data-i18n="switchTitle">Switch 2 Physical Edition</h2>
+          <p class="card-date"><strong>NOV 27, 2026</strong><span>/</span><span data-i18n="switchDateNote">retailer-listed date</span></p>
+          <div class="timer" data-timer="switch" role="group" aria-label="Time to November 27, 2026 in Adelaide">
+            <div class="unit"><span data-unit="days" class="digit">00</span><span class="unit-label" data-i18n="days">DAYS</span></div><b>:</b>
+            <div class="unit"><span data-unit="hours" class="digit">00</span><span class="unit-label" data-i18n="hours">HOURS</span></div><b>:</b>
+            <div class="unit"><span data-unit="minutes" class="digit">00</span><span class="unit-label" data-i18n="minutes">MINS</span></div><b>:</b>
+            <div class="unit"><span data-unit="seconds" class="digit">00</span><span class="unit-label" data-i18n="seconds">SECS</span></div>
+          </div>
+          <p class="status" data-status="switch">COUNTING TOWARD THE DATE</p>
+          <p class="card-description" data-i18n="switchDescription">A retailer lists November 27 for the delayed Switch 2 physical edition. A same-day DLC launch is only fan speculation.</p>
+          <a class="reference" href="https://www.tvgame.com.tw/SalePage/Index/11873934?lang=zh-TW" target="_blank" rel="noopener noreferrer" data-i18n="retailer">VIEW DATE LISTING ↗</a>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="timezone"><i></i><span data-i18n="timeLabel">TIMED TO</span><strong>AUSTRALIA / ADELAIDE</strong><time id="adelaide-clock">--:--:--</time></div>
+      <p data-i18n="disclaimer">Unofficial fan project · Not affiliated with or endorsed by Team Cherry · Dates may change.</p>
+      <a href="https://github.com/pulipulichen/silksong-dlc-countdown" target="_blank" rel="noopener noreferrer">GITHUB ↗</a>
+    </footer>
+  </div>
+</div>
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
