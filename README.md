@@ -47,6 +47,30 @@ Website: **https://pulipulichen.github.io/silksong-dlc-countdown/**
 
 If needed, enable **Settings → Pages → Build and deployment → Source: GitHub Actions** once. You can also manually dispatch the workflow using **Actions → Deploy to GitHub Pages → Run workflow**.
 
+
+## Google Play AAB (GitHub Actions only)
+
+The Android release uses a Trusted Web Activity (TWA), opening the existing online-only website without widgets or notifications. The package ID is `io.github.pulipulichen.silksongdlccountdown`. Do not change it after publishing. No Android SDK or local compilation is needed.
+
+**One-time signing setup:** Create a long-lived upload keystore in a secure environment, store a backup outside GitHub, and add three repository **Settings → Secrets and variables → Actions → Secrets**:
+
+- `ANDROID_KEYSTORE_BASE64`: base64 encoding of the binary JKS/PKCS12 upload keystore (single line).
+- `ANDROID_KEYSTORE_PASSWORD`: the keystore password.
+- `ANDROID_KEY_PASSWORD`: the upload key password.
+
+The key alias must be **`upload`**. Example creation command (run once in a trusted environment; do not commit the resulting file):
+
+```sh
+keytool -genkeypair -v -keystore release.keystore -alias upload -keyalg RSA -keysize 2048 -validity 10000
+base64 -w0 release.keystore
+```
+
+Keep the original keystore and passwords safe. For Google Play App Signing, this is your upload key, not Google's app-signing key.
+
+Go to **Actions → Build Google Play AAB → Run workflow**, enter a unique, increasing `version_code` (1 for first upload, 2 for next, etc.) and `version_name`. After the job succeeds, download the **silksong-dlc-countdown-aab** artifact and upload its `.aab` to Google Play Console. Artifact retention is three days. The workflow intentionally does not publish to Google Play.
+
+**Required for full-screen TWA:** Configure Digital Asset Links on the website at `https://pulipulichen.github.io/.well-known/assetlinks.json` with `delegate_permission/common.handle_all_urls`, the package ID above, and the **Google Play app signing certificate SHA-256** (from Play Console → App integrity). GitHub Pages project sites cannot independently serve a root-origin `/.well-known/` file from this repository's subpath. The owner must configure the root origin (or move to a controlled custom domain). Without successful verification, Chrome may show its address bar instead of full-screen TWA. The upload-key fingerprint is not necessarily the Play app-signing fingerprint.
+
 ## Optional local testing with Podman
 
 **Local testing is never required for deployment.** If you want a local preview, Podman builds everything inside a container, without installing Node.js or npm on the host:
