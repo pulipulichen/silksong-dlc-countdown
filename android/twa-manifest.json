@@ -1,0 +1,30 @@
+{
+  "packageId": "io.github.pulipulichen.silksongdlccountdown",
+  "host": "pulipulichen.github.io",
+  "name": "Silksong DLC Countdown",
+  "launcherName": "Silksong DLC",
+  "display": "standalone",
+  "themeColor": "#061117",
+  "themeColorDark": "#061117",
+  "navigationColor": "#061117",
+  "navigationColorDark": "#061117",
+  "navigationDividerColor": "#061117",
+  "navigationDividerColorDark": "#061117",
+  "backgroundColor": "#061117",
+  "enableNotifications": false,
+  "enableSiteSettingsShortcut": false,
+  "startUrl": "/silksong-dlc-countdown/",
+  "iconUrl": "https://pulipulichen.github.io/silksong-dlc-countdown/icon-512.png",
+  "maskableIconUrl": "https://pulipulichen.github.io/silksong-dlc-countdown/icon-maskable-512.png",
+  "webManifestUrl": "https://pulipulichen.github.io/silksong-dlc-countdown/manifest.webmanifest",
+  "appVersion": "1.0.0",
+  "appVersionCode": 1,
+  "orientation": "default",
+  "minSdkVersion": 23,
+  "signingKey": {
+    "path": "release.keystore",
+    "alias": "upload"
+  },
+  "splashScreenFadeOutDuration": 300,
+  "shortcuts": []
+}
