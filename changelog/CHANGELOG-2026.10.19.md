@@ -57,3 +57,4 @@
 
 ## Documentation
 - Added synchronized English and Traditional Chinese setup guides covering the implemented release screen, explicit-time-zone release timestamp requirements, and local hot-reload workflow.
+- Corrected punctuation-adjacent Markdown emphasis in both READMEs so bold text renders consistently.

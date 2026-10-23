@@ -59,7 +59,7 @@ Both counters use the IANA **Australia/Adelaide** time zone, including daylight 
 
 The installed app is named **Silksong DLC Countdown** (`name`) / **Silksong DLC** (`short_name`), rather than Sea of Sorrow. This site provides a web app manifest and an installable standalone experience in compatible browsers. On Android, use the browser's **Install app** or **Add to Home screen** action; on iOS, use Safari's **Add to Home Screen**. Installation support varies by browser. When Chromium fires the installability event, a small bottom-right invitation on desktop or centered invitation on mobile offers **Install now** and **Maybe later**. Dismissing it suppresses the invitation for 24 hours. iOS Safari instead displays brief **Share → Add to Home Screen** instructions; installed standalone apps do not show the invitation. The card follows the selected site language.
 
-**An internet connection is required.** This project intentionally does **not** register a service worker or use Workbox, offline precaching, or an offline fallback. The browser may still use its ordinary HTTP cache; this is not an offline-first application. The app's manifest is scoped to the GitHub Pages project subpath.
+**An internet connection is required**. This project intentionally does **not** register a service worker or use Workbox, offline precaching, or an offline fallback. The browser may still use its ordinary HTTP cache; this is not an offline-first application. The app's manifest is scoped to the GitHub Pages project subpath.
 
 GitHub Actions generates opaque PNG installation icons from `public/favicon.svg`: 192×192 and 512×512 standard icons, a 512×512 maskable Android icon with safe padding, and a 180×180 Apple touch icon. Edit the SVG to update all icons together; `scripts/render-icons.mjs` creates the files in `dist/` during every production build.
 
@@ -113,7 +113,7 @@ If needed, enable **Settings → Pages → Build and deployment → Source: GitH
 
 The Android release uses a Trusted Web Activity (TWA), opening the existing online-only website without widgets or notifications. The package ID is `io.github.pulipulichen.silksongdlccountdown`. Do not change it after publishing. No Android SDK or local compilation is needed.
 
-**One-time signing setup:** Create a long-lived upload keystore in a secure environment, store a backup outside GitHub, and add three repository **Settings → Secrets and variables → Actions → Secrets**:
+**One-time signing setup**: Create a long-lived upload keystore in a secure environment, store a backup outside GitHub, and add three repository **Settings → Secrets and variables → Actions → Secrets**:
 
 - `ANDROID_KEYSTORE_BASE64`: base64 encoding of the binary JKS/PKCS12 upload keystore (single line).
 - `ANDROID_KEYSTORE_PASSWORD`: the keystore password.
@@ -130,11 +130,11 @@ Keep the original keystore and passwords safe. For Google Play App Signing, this
 
 Go to **Actions → Build Google Play AAB → Run workflow**, enter a unique, increasing `version_code` (1 for first upload, 2 for next, etc.) and `version_name`. After the job succeeds, download the **silksong-dlc-countdown-aab** artifact and upload its `.aab` to Google Play Console. Artifact retention is three days. The workflow intentionally does not publish to Google Play.
 
-**Required for full-screen TWA:** Configure Digital Asset Links on the website at `https://pulipulichen.github.io/.well-known/assetlinks.json` with `delegate_permission/common.handle_all_urls`, the package ID above, and the **Google Play app signing certificate SHA-256** (from Play Console → App integrity). GitHub Pages project sites cannot independently serve a root-origin `/.well-known/` file from this repository's subpath. The owner must configure the root origin (or move to a controlled custom domain). Without successful verification, Chrome may show its address bar instead of full-screen TWA. The upload-key fingerprint is not necessarily the Play app-signing fingerprint.
+**Required for full-screen TWA**: Configure Digital Asset Links on the website at `https://pulipulichen.github.io/.well-known/assetlinks.json` with `delegate_permission/common.handle_all_urls`, the package ID above, and the **Google Play app signing certificate SHA-256** (from Play Console → App integrity). GitHub Pages project sites cannot independently serve a root-origin `/.well-known/` file from this repository's subpath. The owner must configure the root origin (or move to a controlled custom domain). Without successful verification, Chrome may show its address bar instead of full-screen TWA. The upload-key fingerprint is not necessarily the Play app-signing fingerprint.
 
 ## Optional local testing with Podman
 
-**Local testing is never required for deployment.** If you want a local preview, Podman builds everything inside a container, without installing Node.js or npm on the host:
+**Local testing is never required for deployment**. If you want a local preview, Podman builds everything inside a container, without installing Node.js or npm on the host:
 
 ```bash
 podman build -t silksong-dlc-countdown -f Containerfile .
@@ -149,4 +149,4 @@ For Vite hot reload while editing source files, run `./start.sh` (Podman require
 
 To configure the simulated time or DLC release status, edit the `simulationSettings` object in `src/main.ts` as described above. To change the built-in target dates or countdown logic, edit the relevant code in `src/main.ts`; edit `src/i18n.ts` for translations. Commit source changes to `main`, and GitHub Actions will build and deploy the site.
 
-**Disclaimer:** This is an unofficial fan project, unaffiliated with Team Cherry. Neither date is confirmed as the DLC release date.
+**Disclaimer**: This is an unofficial fan project, unaffiliated with Team Cherry. Neither date is confirmed as the DLC release date.

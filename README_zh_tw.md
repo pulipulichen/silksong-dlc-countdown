@@ -62,7 +62,7 @@
 
 安裝後的 App 名稱為 **Silksong DLC Countdown**（`name`）／**Silksong DLC**（`short_name`），而非 Sea of Sorrow。網站提供 Web App Manifest，並可在相容瀏覽器中以獨立 App 方式安裝。在 Android 上，使用瀏覽器的**安裝應用程式**或**新增至主畫面**；在 iOS 上，使用 Safari 的**加入主畫面**。各瀏覽器的安裝支援狀況不同。Chromium 觸發可安裝事件時，桌面版會在右下角、手機版會在畫面中央顯示小型邀請卡，提供**立即安裝**與**稍後再說**。關閉邀請後 24 小時內不會再次顯示。iOS Safari 則會顯示簡短的**分享 → 加入主畫面**提示；已安裝的獨立 App 不會顯示邀請卡。邀請卡會配合網站所選語言。
 
-**使用本網站需要網際網路連線。**本專案刻意不註冊 Service Worker，也不使用 Workbox、離線預快取或離線備援頁面。瀏覽器仍可能使用一般 HTTP 快取，但本網站並非離線優先應用程式。App Manifest 的範圍限定在 GitHub Pages 專案子路徑。
+**使用本網站需要網際網路連線**。本專案刻意不註冊 Service Worker，也不使用 Workbox、離線預快取或離線備援頁面。瀏覽器仍可能使用一般 HTTP 快取，但本網站並非離線優先應用程式。App Manifest 的範圍限定在 GitHub Pages 專案子路徑。
 
 GitHub Actions 會從 `public/favicon.svg` 產生不透明背景的 PNG 安裝圖示：192×192 與 512×512 標準圖示、具有安全留白的 512×512 Android 遮罩圖示，以及 180×180 Apple 觸控圖示。修改 SVG 即可一起更新所有圖示；每次正式建置時，`scripts/render-icons.mjs` 都會將圖示產生到 `dist/`。
 
@@ -115,7 +115,7 @@ const simulationSettings: SimulationSettings = {
 
 Android 版本使用 Trusted Web Activity（TWA）開啟現有的線上網站，不包含小工具或通知。套件 ID 為 `io.github.pulipulichen.silksongdlccountdown`，發布後請勿變更。不需要 Android SDK，也不需要在本機編譯。
 
-**一次性簽署設定：**在安全的環境中建立長期使用的上傳金鑰庫，並在 GitHub 以外妥善備份。接著到儲存庫的 **Settings → Secrets and variables → Actions → Secrets** 新增三個 secret：
+**一次性簽署設定**：在安全的環境中建立長期使用的上傳金鑰庫，並在 GitHub 以外妥善備份。接著到儲存庫的 **Settings → Secrets and variables → Actions → Secrets** 新增三個 secret：
 
 - `ANDROID_KEYSTORE_BASE64`：二進位 JKS／PKCS12 上傳金鑰庫的 Base64 編碼（單行）。
 - `ANDROID_KEYSTORE_PASSWORD`：金鑰庫密碼。
@@ -132,11 +132,11 @@ base64 -w0 release.keystore
 
 前往 **Actions → Build Google Play AAB → Run workflow**，輸入唯一且遞增的 `version_code`（首次上傳使用 1，下一次使用 2，以此類推）與 `version_name`。工作成功後，下載 **silksong-dlc-countdown-aab** artifact，並將 `.aab` 上傳到 Google Play Console。Artifact 保留三天。此工作流程刻意不會直接發布到 Google Play。
 
-**全螢幕 TWA 的必要設定：**在網站根網域 `https://pulipulichen.github.io/.well-known/assetlinks.json` 設定 Digital Asset Links，內容包含 `delegate_permission/common.handle_all_urls`、上述套件 ID，以及 **Google Play App 簽署憑證的 SHA-256**（可在 Play Console → App integrity 找到）。GitHub Pages 專案網站無法從這個儲存庫的子路徑獨立提供根網域的 `/.well-known/` 檔案。擁有者需設定根網域，或改用可自行管理的網域。若未成功驗證，Chrome 可能會顯示網址列，而不是全螢幕 TWA。上傳金鑰的指紋不一定等於 Play App 簽署金鑰的指紋。
+**全螢幕 TWA 的必要設定**：在網站根網域 `https://pulipulichen.github.io/.well-known/assetlinks.json` 設定 Digital Asset Links，內容包含 `delegate_permission/common.handle_all_urls`、上述套件 ID，以及 **Google Play App 簽署憑證的 SHA-256**（可在 Play Console → App integrity 找到）。GitHub Pages 專案網站無法從這個儲存庫的子路徑獨立提供根網域的 `/.well-known/` 檔案。擁有者需設定根網域，或改用可自行管理的網域。若未成功驗證，Chrome 可能會顯示網址列，而不是全螢幕 TWA。上傳金鑰的指紋不一定等於 Play App 簽署金鑰的指紋。
 
 ## 使用 Podman 在本機測試（選用）
 
-**部署不需要在本機測試。**若想在本機預覽，可使用 Podman 在容器內完成建置，不需在主機安裝 Node.js 或 npm：
+**部署不需要在本機測試**。若想在本機預覽，可使用 Podman 在容器內完成建置，不需在主機安裝 Node.js 或 npm：
 
 ```bash
 podman build -t silksong-dlc-countdown -f Containerfile .
@@ -151,4 +151,4 @@ podman run --rm -p 8080:80 silksong-dlc-countdown
 
 要設定模擬時間或 DLC 發佈狀態，請依上方說明修改 `src/main.ts` 的 `simulationSettings`。要修改網站內建的目標日期或倒數邏輯，也請編輯 `src/main.ts`；要修改翻譯則編輯 `src/i18n.ts`。將程式碼變更提交到 `main` 後，GitHub Actions 會負責建置與部署。
 
-**免責聲明：**這是非官方粉絲專案，與 Team Cherry 無關。兩個日期都不是已確認的 DLC 發售日期。
+**免責聲明**：這是非官方粉絲專案，與 Team Cherry 無關。兩個日期都不是已確認的 DLC 發售日期。
