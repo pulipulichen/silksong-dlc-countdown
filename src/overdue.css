@@ -1,0 +1,166 @@
+/* The ordinary countdown keeps its existing ocean theme and layout. */
+.watch-layout { display: contents; }
+.overdue-art[hidden],.overdue-since[hidden] { display: none; }
+
+html[data-dlc-overdue="true"] {
+  --gold: #e9b083;
+  --teal: #e8a18b;
+  background: #1a101b;
+  height: 100%;
+  overflow: hidden;
+}
+html[data-dlc-overdue="true"] body { height: 100%; overflow: hidden; }
+html[data-dlc-overdue="true"] #app.site-shell {
+  height: 100vh; height: 100dvh; min-height: 0; overflow: clip;
+  background:
+    radial-gradient(ellipse 55% 40% at 8% 100%, rgba(212,84,40,.46), transparent 78%),
+    radial-gradient(ellipse 48% 60% at 100% 73%, rgba(152,48,36,.36), transparent 76%),
+    radial-gradient(ellipse 50% 55% at 20% 45%, rgba(119,57,57,.24), transparent 80%),
+    linear-gradient(160deg, #211724 0%, #2b1924 42%, #351c26 72%, #6d302b 100%);
+}
+html[data-dlc-overdue="true"] .site-shell::before {
+  opacity: .6; mask-image: none;
+  background:
+    radial-gradient(ellipse 18% 100% at 4% 85%, rgba(242,137,75,.12), transparent 78%),
+    radial-gradient(ellipse 12% 90% at 95% 105%, rgba(255,163,80,.2), transparent 70%);
+}
+html[data-dlc-overdue="true"] .site-shell::after { border-color: rgba(224,161,124,.18); }
+html[data-dlc-overdue="true"] .sea,
+html[data-dlc-overdue="true"] .horizon,
+html[data-dlc-overdue="true"] .halo { display: none; }
+html[data-dlc-overdue="true"] .atmosphere--left { bottom: -35%; left: -22%; background: radial-gradient(circle, #f49a5d, transparent 68%); opacity: .26; }
+html[data-dlc-overdue="true"] .atmosphere--right { top: 16%; right: -28%; background: radial-gradient(circle, #bc4a48, transparent 68%); opacity: .22; }
+html[data-dlc-overdue="true"] .vignette { background: radial-gradient(ellipse at 50% 45%, transparent 28%, rgba(14,8,18,.56) 100%); }
+html[data-dlc-overdue="true"] .page { height: 100%; min-height: 0; }
+html[data-dlc-overdue="true"] .brand-mark { color: #e1a68d; }
+html[data-dlc-overdue="true"] .fan-label { color: #c4aba6; }
+html[data-dlc-overdue="true"] .language-picker { background: rgba(33,16,27,.5); border-color: rgba(231,172,132,.28); }
+html[data-dlc-overdue="true"] .language-picker option { background: #30202b; }
+html[data-dlc-overdue="true"] .main { max-width: 1160px; gap: clamp(20px,3vh,36px); padding-block: clamp(22px,3.4vh,42px); }
+html[data-dlc-overdue="true"] .header-shell { display: none; }
+html[data-dlc-overdue="true"] .eyebrow { color: #d6a18a; font-size: clamp(9px,.8vw,11px); }
+html[data-dlc-overdue="true"] .hero h1 { margin-top: 13px; font-size: clamp(32px,4.2vw,62px); line-height: 1.25; color: #f9ead7; text-shadow: 0 4px 35px rgba(225,116,71,.15); }
+html[data-dlc-overdue="true"] .hero h1 em { color: #ee9f7c; }
+html[data-dlc-overdue="true"] .hero p { max-width: 740px; margin-top: 12px; padding-inline: 0; color: #cfb5ae; font-size: clamp(12px,1vw,14px); line-height: 1.8; }
+html[data-dlc-overdue="true"] .watch-layout { display: grid; grid-template-columns: minmax(0,.88fr) minmax(0,1.12fr); align-items: center; gap: clamp(24px,4vw,62px); width: 100%; min-width: 0; }
+html[data-dlc-overdue="true"] .watch-layout > .cards { width: 100%; max-width: none; grid-template-columns: minmax(0,1fr); }
+html[data-dlc-overdue="true"] .watch-layout { min-height: 0; }
+html[data-dlc-overdue="true"] .card-date,
+html[data-dlc-overdue="true"] .overdue-since,
+html[data-dlc-overdue="true"] .card-description { display: none; }
+
+.overdue-art { position: relative; min-width: 0; margin: 0; text-align: center; }
+.overdue-art__scene { position: relative; isolation: isolate; width: 100%; max-width: 360px; margin-inline: auto; }
+.overdue-art__scene::before {
+  content: ""; position: absolute; z-index: -1; inset: 12% 8% 7%; border: 1px solid rgba(239,171,121,.52); border-radius: 50%;
+  background: radial-gradient(circle at 40% 85%, rgba(245,151,84,.16), transparent 65%);
+  box-shadow: 0 0 25px rgba(241,143,87,.08), inset 0 0 25px rgba(241,143,87,.06);
+  transform: rotate(-16deg);
+}
+.overdue-art__scene::after { content: ""; position: absolute; z-index: -1; inset: 15% 11% 4%; border: 1px solid rgba(218,139,112,.15); border-radius: 50%; transform: rotate(16deg); }
+.overdue-art img { display: block; width: 100%; height: auto; transform: translateX(18.5%); filter: drop-shadow(0 18px 22px rgba(17,8,18,.36)); } /* Center the PNG's visible content despite its transparent right padding. */
+.overdue-art figcaption { display: flex; flex-direction: column; align-items: center; gap: 9px; margin-top: 12px; }
+.overdue-art__badge { display: inline-flex; align-items: center; gap: 8px; color: #e7b79d; font-size: 9px; font-weight: 700; letter-spacing: .2em; }
+.overdue-art__badge::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: #ed7254; box-shadow: 0 0 9px rgba(239,107,73,.4); }
+.overdue-art__caption { color: #c3a19c; font-size: 12px; letter-spacing: .08em; }
+
+html[data-dlc-overdue="true"] .card--gold {
+  padding: clamp(18px,2vw,28px);
+  border-color: rgba(215,147,113,.45);
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(150,65,58,.15), transparent 60%),
+    linear-gradient(145deg, rgba(56,29,37,.97), rgba(32,20,31,.98) 70%, rgba(47,25,34,.98));
+  box-shadow: 0 24px 70px rgba(16,7,17,.32), inset 0 1px rgba(255,220,190,.05);
+  animation: entrance .9s .15s both;
+}
+html[data-dlc-overdue="true"] .card--gold:hover { transform: translateY(-2px); border-color: rgba(236,175,136,.7); }
+html[data-dlc-overdue="true"] .card--gold::before,
+html[data-dlc-overdue="true"] .card--gold::after { width: 22px; height: 22px; border-color: rgba(224,164,125,.62); }
+html[data-dlc-overdue="true"] .card-light { background: radial-gradient(circle, rgba(240,127,85,.12), transparent 68%); }
+html[data-dlc-overdue="true"] .card-kicker { font-size: 10px; line-height: 1.6; letter-spacing: .12em; color: #e1a082; }
+html[data-dlc-overdue="true"] .card-kicker::before { background: #ef7858; box-shadow: 0 0 10px rgba(239,120,88,.4); }
+html[data-dlc-overdue="true"] .card h2 { margin: 16px 0 6px; color: #f5e4d2; font-size: clamp(21px,2vw,29px); line-height: 1.45; }
+html[data-dlc-overdue="true"] .countdown-date { display: none; }
+html[data-dlc-overdue="true"] .card-date { color: #c3a09a; font-size: 11px; line-height: 1.6; }
+html[data-dlc-overdue="true"] .status { justify-content: flex-start; margin-top: 14px; color: #efb794; font-size: clamp(11px,.9vw,13px); line-height: 1.8; letter-spacing: .04em; text-align: start; }
+html[data-dlc-overdue="true"] .status::before,
+html[data-dlc-overdue="true"] .status::after { content: none; }
+html[data-dlc-overdue="true"] .timer { grid-template-columns: minmax(0,1.6fr) auto minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr); gap: clamp(2px,.45vw,7px); margin-top: 11px; padding: 12px 0 10px; border-color: rgba(223,161,130,.2); }
+html[data-dlc-overdue="true"] .digit { font-family: "DM Sans",sans-serif; font-weight: 500; font-size: clamp(22px,9.4cqw,64px); line-height: 1.1; color: #ffecd4; letter-spacing: -.045em; text-shadow: 0 0 24px rgba(247,167,107,.14); }
+html[data-dlc-overdue="true"] .unit:first-child .digit { color: #ffb18a; }
+html[data-dlc-overdue="true"] .timer b { color: #ac7169; font-family: "DM Sans",sans-serif; font-size: clamp(18px,5.5cqw,35px); line-height: 1.55; }
+html[data-dlc-overdue="true"] .unit-label { margin-top: 10px; color: #d3aaa0; font-size: 9px; letter-spacing: .15em; }
+.overdue-since { margin: 13px 0 0; color: #c8a79b; font-size: 10px; line-height: 1.8; }
+html[data-dlc-overdue="true"] .card-description { min-height: 0; margin-top: 12px; color: #c8aba5; font-size: 11px; line-height: 1.8; }
+html[data-dlc-overdue="true"] .reference { align-self: flex-end; margin-top: 10px; color: #edb591; font-size: 10px; line-height: 1.6; border-color: rgba(232,156,117,.4); letter-spacing: .08em; text-align: end; }
+html[data-dlc-overdue="true"] .reference:hover { color: #fff0dc; }
+html[data-dlc-overdue="true"] .footer { color: #cdb4aa; }
+html[data-dlc-overdue="true"] .footer::before { border-color: rgba(222,161,126,.22); background: linear-gradient(180deg, rgba(38,21,30,.6), rgba(25,15,25,.9)); }
+html[data-dlc-overdue="true"] .timezone i { background: #e68d6d; box-shadow: 0 0 10px rgba(230,141,109,.4); }
+html[data-dlc-overdue="true"] .timezone strong { color: #e5bda4; }
+html[data-dlc-overdue="true"] .timezone time,
+html[data-dlc-overdue="true"] .footer-credit a { color: #c9aba3; }
+html[data-dlc-overdue="true"] .install-card { background: linear-gradient(145deg, #482833, #241823); border-color: rgba(233,164,129,.6); }
+html[data-dlc-overdue="true"] .install-card p,
+html[data-dlc-overdue="true"] .install-card__later,
+html[data-dlc-overdue="true"] .install-card__close { color: #dbc0b4; }
+
+@media (max-width: 800px) {
+  html[data-dlc-overdue="true"] .main { padding-block: 25px 30px; gap: 20px; }
+  html[data-dlc-overdue="true"] .hero h1 { font-size: clamp(29px,6vw,45px); }
+  html[data-dlc-overdue="true"] .hero p { display: block; max-width: 520px; margin-top: 10px; font-size: 12px; }
+  html[data-dlc-overdue="true"] .watch-layout { grid-template-columns: minmax(0,1fr); max-width: 570px; gap: 24px; }
+  .overdue-art__scene { width: min(60vw,240px); }
+  .overdue-art figcaption { gap: 7px; margin-top: -4px; }
+  .overdue-art__caption { font-size: 11px; }
+  html[data-dlc-overdue="true"] .card--gold { padding: 24px; }
+  html[data-dlc-overdue="true"] .card h2 { margin-top: 12px; font-size: clamp(20px,4vw,26px); }
+  html[data-dlc-overdue="true"] .status { margin-top: 21px; font-size: 12px; }
+  html[data-dlc-overdue="true"] .timer { padding-block: 18px 15px; }
+  html[data-dlc-overdue="true"] .digit { font-size: clamp(22px,9cqw,52px); }
+  html[data-dlc-overdue="true"] .card-description { margin-top: 18px; font-size: 11px; }
+  html[data-dlc-overdue="true"] .reference { margin-top: 16px; }
+  html[data-dlc-overdue="true"] .timezone time { display: inline; }
+}
+@media (max-width: 390px) {
+  html[data-dlc-overdue="true"] .card--gold { padding: 21px 17px; }
+  html[data-dlc-overdue="true"] .hero h1 { font-size: 29px; }
+  html[data-dlc-overdue="true"] .eyebrow { gap: 8px; font-size: 8px; letter-spacing: .12em; }
+  html[data-dlc-overdue="true"] .card-kicker { font-size: 9px; }
+  html[data-dlc-overdue="true"] .status { font-size: 11px; }
+  html[data-dlc-overdue="true"] .unit-label { font-size: 8px; letter-spacing: .07em; }
+}
+@media (min-width: 801px) and (max-height: 750px) {
+  html[data-dlc-overdue="true"] .main { padding-block: 8px; gap: 12px; }
+  html[data-dlc-overdue="true"] .hero h1 { font-size: clamp(30px,3.4vw,46px); margin-top: 8px; }
+  html[data-dlc-overdue="true"] .hero p { margin-top: 7px; }
+  html[data-dlc-overdue="true"] .overdue-art__scene { max-width: 240px; }
+  html[data-dlc-overdue="true"] .card--gold { padding: 14px 22px; }
+  html[data-dlc-overdue="true"] .card h2 { margin-top: 8px; }
+  html[data-dlc-overdue="true"] .status { margin-top: 9px; }
+  html[data-dlc-overdue="true"] .timer { margin-top: 7px; padding-block: 9px 7px; }
+  html[data-dlc-overdue="true"] .digit { font-size: clamp(22px,8cqw,48px); }
+  html[data-dlc-overdue="true"] .unit-label { margin-top: 6px; }
+  html[data-dlc-overdue="true"] .overdue-since { margin-top: 8px; }
+  html[data-dlc-overdue="true"] .card-description { margin-top: 8px; }
+}
+@media (max-width: 800px) {
+  html[data-dlc-overdue="true"] .main { padding-block: 6px; gap: 10px; }
+  html[data-dlc-overdue="true"] .watch-layout { gap: 8px; }
+  html[data-dlc-overdue="true"] .overdue-art__scene { width: min(32vw,18dvh,150px); }
+  html[data-dlc-overdue="true"] .overdue-art figcaption { display: none; }
+  html[data-dlc-overdue="true"] .hero h1 { margin-top: 6px; font-size: clamp(24px,5vw,36px); }
+  html[data-dlc-overdue="true"] .hero p { margin-top: 5px; font-size: 11px; line-height: 1.5; }
+  html[data-dlc-overdue="true"] .card--gold { padding: 12px 17px; }
+  html[data-dlc-overdue="true"] .card h2 { margin-top: 6px; font-size: 20px; }
+  html[data-dlc-overdue="true"] .status { margin-top: 8px; font-size: 11px; line-height: 1.5; }
+  html[data-dlc-overdue="true"] .timer { margin-top: 6px; padding-block: 8px; }
+  html[data-dlc-overdue="true"] .digit { font-size: clamp(22px,8cqw,42px); }
+  html[data-dlc-overdue="true"] .unit-label { margin-top: 5px; }
+  html[data-dlc-overdue="true"] .overdue-since,
+  html[data-dlc-overdue="true"] .card-description,
+  html[data-dlc-overdue="true"] .reference { margin-top: 7px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-dlc-overdue="true"] .card--gold:hover { transform: none; }
+}

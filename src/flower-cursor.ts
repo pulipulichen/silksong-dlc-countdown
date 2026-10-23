@@ -37,6 +37,8 @@ export function startSilkCursor(reduceMotion: MediaQueryList): void {
     cursor.style.transform = `translate3d(${event.clientX - 24}px, ${event.clientY - 28}px, 0)`;
     cursor.classList.toggle("is-interactive", event.target instanceof Element
       && Boolean(event.target.closest("a, button, select, label, input, textarea, [role='button']")));
+    cursor.classList.toggle("is-pointer", event.target instanceof Element
+      && Boolean(event.target.closest("a, button, [role='button'], .language-picker")));
     cursor.classList.add("is-visible");
     document.documentElement.classList.add("silk-cursor-active");
   }

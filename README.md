@@ -1,5 +1,7 @@
 # The Long Wait — Silksong DLC Fan Countdown
 
+[English](./README.md) · [繁體中文](./README_zh_tw.md)
+
 [![Deploy to GitHub Pages](https://github.com/pulipulichen/silksong-dlc-countdown/actions/workflows/deploy.yml/badge.svg)](https://github.com/pulipulichen/silksong-dlc-countdown/actions/workflows/deploy.yml)
 
 **[Open the live website](https://pulipulichen.github.io/silksong-dlc-countdown/)**
@@ -26,11 +28,32 @@ GitHub Actions generates opaque PNG installation icons from `public/favicon.svg`
 ## Features
 
 - Single-screen responsive desktop/mobile layout without document scrolling.
-- Two live countdown/elapsed-time timers.
+- Two live countdown/elapsed-time timers, with source-configurable simulated time and DLC release status.
 - Browser-language detection and remembered selection: English, Traditional Chinese, Simplified Chinese, Japanese.
 - Original abstract teal-and-gold Canvas particles, glowing arcs, pointer parallax, touch sparks and digit animations.
 - Reduced-motion accessibility support and lower mobile particle counts.
 - Source references, fan-site disclaimer, GitHub link and social preview.
+
+## Configure simulated time and DLC release status
+
+Edit the `simulationSettings` object near the top of `src/main.ts`. These settings are code-only and do not appear as controls on the website:
+
+- `mode: "auto"` uses the real current time. Set it to `"custom"` to preview the configured date.
+- `date` is the simulation start date in `YYYY-MM-DD` format. It starts at **00:00 Australia/Adelaide time** and advances in real time from when the page loads.
+- `dlcReleased: true` selects the localized release-celebration screen; `false` keeps the countdown or overdue screen. Set `dlcReleasedAt` to the confirmed release timestamp with an explicit time zone (`Z` or a UTC offset) to start the elapsed timer. If the timestamp is empty or invalid, the timer remains unset (`--`) instead of inventing a release time.
+- `dlcAnnouncementUrl` accepts an absolute `http://` or `https://` URL for the announcement button. Leave it empty to hide the button.
+
+For example, to preview **2026-12-01** with the released screen enabled, set the object as shown below. The elapsed timer stays unset until you configure the actual release timestamp:
+
+```ts
+const simulationSettings: SimulationSettings = {
+  mode: "custom",
+  date: "2026-12-01",
+  dlcReleased: true,
+};
+```
+
+To return to real time, change `mode` back to `"auto"`. Save the source change and rebuild/redeploy the site for the public website to use it.
 
 ## Automatic build & deployment — GitHub Actions
 
@@ -82,8 +105,10 @@ podman run --rm -p 8080:80 silksong-dlc-countdown
 
 Preview: http://localhost:8080/silksong-dlc-countdown/
 
-## Change countdown dates or translations
+For Vite hot reload while editing source files, run `./start.sh` (Podman required). It builds the development image and serves the same preview URL with the project source mounted into the container.
 
-Edit `src/main.ts` for dates or countdown logic and `src/i18n.ts` for translations; then commit to `main`. GitHub Actions handles the build and deployment.
+## Change built-in countdown dates or translations
+
+To configure the simulated time or DLC release status, edit the `simulationSettings` object in `src/main.ts` as described above. To change the built-in target dates or countdown logic, edit the relevant code in `src/main.ts`; edit `src/i18n.ts` for translations. Commit source changes to `main`, and GitHub Actions will build and deploy the site.
 
 **Disclaimer:** This is an unofficial fan project, unaffiliated with Team Cherry. Neither date is confirmed as the DLC release date.

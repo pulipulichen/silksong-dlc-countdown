@@ -1,4 +1,13 @@
-# Optional Podman-only local build: no host Node.js/npm.
+# Local development image for Vite hot reload; source files are bind-mounted by start.sh.
+FROM docker.io/library/node:22-alpine AS dev
+WORKDIR /app
+COPY package*.json ./
+RUN npm install --no-audit --no-fund
+COPY . .
+EXPOSE 5173
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+
+# Optional Podman-only local production build: no host Node.js/npm.
 FROM docker.io/library/node:22-alpine AS build
 WORKDIR /app
 COPY package*.json ./

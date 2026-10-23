@@ -16,7 +16,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
   <link rel="manifest" href="%BASE_URL%manifest.webmanifest" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Sea of Sorrow" />
   <link rel="apple-touch-icon" sizes="180x180" href="%BASE_URL%apple-touch-icon.png" />
@@ -34,6 +34,23 @@
   <div class="halo halo--outer" aria-hidden="true"></div>
   <div class="halo halo--inner" aria-hidden="true"></div>
   <div class="vignette" aria-hidden="true"></div>
+  <div class="celebration" aria-hidden="true">
+    <div class="celebration-confetti"></div>
+    <svg class="celebration-ribbons" viewBox="0 0 1440 350" fill="none" preserveAspectRatio="none">
+      <path class="ribbon ribbon--gold" d="M90 -30 C45 35 190 30 160 90 S80 110 110 160 S220 160 180 230 S120 250 145 305" />
+      <path class="ribbon ribbon--mint" d="M285 -35 C340 30 235 40 275 100 S345 105 320 165 S250 195 285 240" />
+      <path class="ribbon ribbon--coral" d="M-15 20 C65 40 -15 100 35 135 S100 175 55 220" />
+      <path class="ribbon ribbon--gold" d="M1310 -30 C1380 40 1230 35 1270 100 S1370 115 1330 170 S1220 175 1265 235 S1320 265 1295 320" />
+      <path class="ribbon ribbon--coral" d="M1135 -35 C1085 25 1205 45 1160 105 S1090 125 1120 185 S1180 195 1150 245" />
+      <path class="ribbon ribbon--mint" d="M1450 35 C1375 70 1450 115 1400 155 S1365 210 1400 250" />
+    </svg>
+    <span class="balloon balloon--one"></span>
+    <span class="balloon balloon--two"></span>
+    <span class="balloon balloon--three"></span>
+    <span class="balloon balloon--four"></span>
+    <span class="balloon balloon--five"></span>
+    <span class="balloon balloon--six"></span>
+  </div>
   <div class="sea" aria-hidden="true">
     <svg class="sea-band sea-band--back" viewBox="0 0 2880 160" preserveAspectRatio="none">
       <path fill="#1c7380" fill-opacity=".5" d="M0 70 Q90 24 180 70 T360 70 T540 70 T720 70 T900 70 T1080 70 T1260 70 T1440 70 T1620 70 T1800 70 T1980 70 T2160 70 T2340 70 T2520 70 T2700 70 T2880 70 V160 H0 Z"/>
@@ -66,7 +83,6 @@
         <span class="sr-only">GitHub</span>
       </a>
       <div class="top-actions">
-        <span class="fan-label" data-i18n="fan">AN UNOFFICIAL FAN TRIBUTE</span>
         <label class="language-picker">
           <span class="sr-only" data-i18n="language">Choose language</span>
           <span aria-hidden="true">◎</span>
@@ -91,9 +107,19 @@
           </svg>
         </span>
         <div class="eyebrow"><i></i><span data-i18n="eyebrow">HOLLOW KNIGHT: SILKSONG · SEA OF SORROW</span><i></i></div>
-        <h1 id="hero-title"><span data-i18n="heroStart">Silksong</span> <em data-i18n="heroEnd">DLC Countdown</em></h1>
-        <p data-i18n="intro">Unofficial countdown for Silksong’s free Sea of Sorrow DLC. The dates shown are not confirmed release dates.</p>
+        <h1 id="hero-title"><span data-i18n="heroStart" data-i18n-overdue="overdueHeroStart">Silksong</span> <em data-i18n="heroEnd" data-i18n-overdue="overdueHeroEnd">DLC Countdown</em></h1>
+        <p data-i18n="intro" data-i18n-overdue="overdueIntro">Unofficial countdown for Silksong’s free Sea of Sorrow DLC. The dates shown are not confirmed release dates.</p>
       </section>
+      <div class="watch-layout">
+        <figure class="overdue-art" hidden>
+          <div class="overdue-art__scene">
+            <img src="./src/assets/clown-mask.png" width="520" height="386" alt="" data-i18n-alt="overdueArtAlt" />
+          </div>
+          <figcaption>
+            <span class="overdue-art__badge" data-i18n="overdueBadge">STILL WAITING FOR THE DLC</span>
+            <span class="overdue-art__caption" data-i18n="overdueArtCaption">The makeup is ready. The DLC isn't.</span>
+          </figcaption>
+        </figure>
       <div class="cards">
         <section class="card card--teal" data-card="switch" aria-labelledby="switch-title">
           <div class="card-light" aria-hidden="true"></div>
@@ -113,24 +139,32 @@
 
         <section class="card card--gold" data-card="dlc" aria-labelledby="dlc-title">
           <div class="card-light" aria-hidden="true"></div>
-          <div class="card-top"><span class="card-kicker" data-i18n="dlcKicker">THE YEAR-END HORIZON</span></div>
-          <h2 id="dlc-title"><span data-i18n="dlcTitle">Sea of Sorrow — DLC Watch</span>: <time datetime="2026-12-31">2026/12/31</time></h2>
-          <p class="card-date" data-i18n="dlcDateNote">fan-chosen year-end marker</p>
+          <div class="card-top">
+            <span class="card-kicker" data-i18n="dlcKicker" data-i18n-overdue="overdueKicker">THE YEAR-END HORIZON</span>
+            <span class="release-badge" data-release-only data-i18n="releasedBadge" hidden>OUT NOW</span>
+          </div>
+          <h2 id="dlc-title"><span data-i18n="dlcTitle" data-i18n-overdue="overdueTitle">Sea of Sorrow — DLC Watch</span><span class="countdown-date" data-countdown-only>: <time datetime="2026-12-31">2026/12/31</time></span></h2>
+          <p class="card-date" id="dlc-date-note">
+            <span data-i18n="dlcDateNote" data-i18n-overdue="overdueDateNote">fan-chosen year-end marker</span>
+            <time id="dlc-release-time" class="release-time" hidden></time>
+          </p>
           <p class="status" data-status="dlc">COUNTING TOWARD THE DATE</p>
-          <div class="timer" data-timer="dlc" role="group" aria-label="Time to December 31, 2026 in Adelaide">
+          <div class="timer" data-timer="dlc" role="group" aria-describedby="dlc-date-note" aria-label="Time to December 31, 2026 in Adelaide">
             <div class="unit"><span data-unit="days" class="digit">00</span><span class="unit-label" data-i18n="days">DAYS</span></div><b>:</b>
             <div class="unit"><span data-unit="hours" class="digit">00</span><span class="unit-label" data-i18n="hours">HOURS</span></div><b>:</b>
             <div class="unit"><span data-unit="minutes" class="digit">00</span><span class="unit-label" data-i18n="minutes">MINS</span></div><b>:</b>
             <div class="unit"><span data-unit="seconds" class="digit">00</span><span class="unit-label" data-i18n="seconds">SECS</span></div>
           </div>
-          <p class="card-description" data-i18n="dlcDescription">Team Cherry announced a free DLC for 2026. December 31 is a fan-selected marker, not an official release date.</p>
-          <a class="reference" href="https://youtu.be/qDFEeeLy6ws?t=28" target="_blank" rel="noopener noreferrer" data-i18n="teaser">WATCH THE DLC TEASER ↗</a>
+          <p class="overdue-since" data-i18n="overdueSince" hidden>Counting from January 1, 2027, 00:00 · Adelaide time</p>
+          <p class="card-description" data-i18n="dlcDescription" data-i18n-overdue="overdueDescription">Team Cherry announced a free DLC for 2026. December 31 is a fan-selected marker, not an official release date.</p>
+          <a class="reference" href="https://youtu.be/qDFEeeLy6ws?t=28" target="_blank" rel="noopener noreferrer" data-i18n="teaser" data-i18n-overdue="overdueTeaser">WATCH THE DLC TEASER ↗</a>
         </section>
+      </div>
       </div>
     </main>
 
     <footer class="footer">
-      <div class="timezone"><i></i><span data-i18n="timeLabel">TIMED TO</span><strong>AUSTRALIA / ADELAIDE</strong><time id="adelaide-clock">--:--:--</time></div>
+      <div class="timezone"><i></i><span data-i18n="timeLabel" data-i18n-overdue="overdueTimeLabel">TIMED TO</span><strong>AUSTRALIA / ADELAIDE</strong><time id="adelaide-clock">--:--:--</time></div>
       <p data-i18n="disclaimer">Unofficial fan project · Not affiliated with or endorsed by Team Cherry · Dates may change.</p>
       <div class="footer-credit">
         <span class="fan-signature" data-i18n="fanSignature">Fan: Pulipuli Chen</span>
