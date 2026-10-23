@@ -6,7 +6,45 @@
 
 **[Open the live website](https://pulipulichen.github.io/silksong-dlc-countdown/)**
 
-A full-screen animated, multilingual **unofficial fan countdown** for two dates fans are watching. Static Vite + TypeScript + CSS + Canvas, no backend and no game artwork or characters.
+An animated, multilingual **unofficial fan countdown** that changes with the wait for *Hollow Knight: Silksong — Sea of Sorrow*: two milestones, a final countdown, a release celebration, or an overdue surprise. Built with static Vite + TypeScript + CSS + Canvas, with no backend or official game artwork.
+
+## Four possible futures — screenshot showcase
+
+What if the wait continues? What if the DLC finally arrives? This site is designed to tell that story as time passes, with four possible visual states rather than a static countdown page.
+
+> **Scenario previews:** The following images demonstrate possible site states using simulated dates and a manually configured release flag. They are not evidence of an official release date, delay, or launch. The website does **not** automatically verify DLC announcements.
+
+### 1. Two dates, one long wait — dual countdown
+
+![Two side-by-side countdowns for the Switch 2 physical edition and Sea of Sorrow DLC](./demo/demo_wait_switch_2.png)
+
+Before the end of November 2026, two cards appear side by side. The first watches **November 27, 2026**, the retailer-listed Switch 2 physical-edition date; the second watches the fan-selected **December 31, 2026** year-end DLC marker. Both tick down in days, hours, minutes, and seconds.
+
+The Switch 2 date is **not** an announced DLC release date. Its connection to the DLC is speculation.
+
+### 2. One countdown remains — the end of 2026 approaches
+
+![Single centered Sea of Sorrow DLC countdown card](./demo/demo_wait_2026_end.png)
+
+Beginning **November 28, 2026** in Adelaide, the Switch 2 reference card disappears. The remaining card takes center stage as fans watch the final days of the year Team Cherry targeted for the free expansion. The moving ocean backdrop keeps the anticipation alive.
+
+**December 31 is a fan-selected year-end checkpoint, not a confirmed launch date.**
+
+### 3. The wait is over — release celebration
+
+![Simulated DLC release celebration with balloons and elapsed-time counter](./demo/demo_dlc_released.png)
+
+If the DLC is officially released, the maintainer can set `dlcReleased: true`, provide the verified release timestamp, and optionally link to the announcement. The experience switches to a festive teal-and-gold celebration with balloons and confetti, a release announcement button, and a **count-up timer showing time since release**.
+
+**This is a hypothetical preview, not confirmation that the DLC has been released.** The release status and timestamp must be updated in the source code.
+
+### 4. Still waiting — 2026 is over, but where is the DLC?
+
+![Overdue DLC state with a clown-inspired fan illustration and elapsed-time counter](./demo/demo_dlc_not_released_yet.png)
+
+If the expansion remains unreleased when **January 1, 2027** begins in Adelaide, the atmosphere transforms: dark crimson tones, a clown-inspired fan illustration, and a tongue-in-cheek **"2026 is over — where's the DLC?"** message. The clock now counts **up from the start of 2027**, making every extra day of waiting visible.
+
+This playful overdue state reflects an unfulfilled anticipated *year*, **not** a claim that Team Cherry promised a December 31 launch.
 
 ## The two dates
 
