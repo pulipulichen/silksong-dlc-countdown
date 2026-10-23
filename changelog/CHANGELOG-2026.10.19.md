@@ -1,6 +1,7 @@
 # 2026.10.19 (Week 3)
 
 ## Fixed
+- Kept the custom silk cursor visible above the PWA install invitation so it is not obscured while interacting with the install card.
 - Count overdue DLC time from January 1, 2027, at Adelaide midnight instead of reusing the December 31 countdown marker, avoiding an extra day in the elapsed timer.
 - Corrected the mobile page wrapper’s selector specificity so off-screen background decorations are clipped instead of creating a long empty scroll area below the footer.
 - Switched GitHub Pages to Actions-only publishing to stop the built-in Jekyll deployment from overwriting Vite output, restoring the favicon and compiled application assets.
