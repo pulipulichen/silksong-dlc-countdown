@@ -66,87 +66,16 @@ GitHub Actions generates opaque PNG installation icons from `public/favicon.svg`
 ## Features
 
 - Single-screen responsive desktop/mobile layout without document scrolling.
-- Two live countdown/elapsed-time timers, with source-configurable simulated time and DLC release status.
+- Two live countdown/elapsed-time timers.
 - Browser-language detection and remembered selection: English, Traditional Chinese, Simplified Chinese, Japanese.
 - Original abstract teal-and-gold Canvas particles, glowing arcs, pointer parallax, touch sparks and digit animations.
 - Reduced-motion accessibility support and lower mobile particle counts.
 - Source references, fan-site disclaimer, GitHub link and social preview.
 
-## Configure simulated time and DLC release status
+## Developer documentation
 
-Edit the `simulationSettings` object near the top of `src/main.ts`. These settings are code-only and do not appear as controls on the website:
-
-- `mode: "auto"` uses the real current time. Set it to `"custom"` to preview the configured date.
-- `date` is the simulation start date in `YYYY-MM-DD` format. It starts at **00:00 Australia/Adelaide time** and advances in real time from when the page loads.
-- `dlcReleased: true` selects the localized release-celebration screen; `false` keeps the countdown or overdue screen. Set `dlcReleasedAt` to the confirmed release timestamp with an explicit time zone (`Z` or a UTC offset) to start the elapsed timer. If the timestamp is empty or invalid, the timer remains unset (`--`) instead of inventing a release time.
-- `dlcAnnouncementUrl` accepts an absolute `http://` or `https://` URL for the announcement button. Leave it empty to hide the button.
-
-For example, to preview **2026-12-01** with the released screen enabled, set the object as shown below. The elapsed timer stays unset until you configure the actual release timestamp:
-
-```ts
-const simulationSettings: SimulationSettings = {
-  mode: "custom",
-  date: "2026-12-01",
-  dlcReleased: true,
-};
-```
-
-To return to real time, change `mode` back to `"auto"`. Save the source change and rebuild/redeploy the site for the public website to use it.
-
-## Automatic build & deployment — GitHub Actions
-
-**Nothing needs to be downloaded, installed, or compiled on your computer to publish the site.**
-
-Every push to `main` automatically starts [Deploy to GitHub Pages](https://github.com/pulipulichen/silksong-dlc-countdown/actions/workflows/deploy.yml) using a GitHub-hosted runner:
-
-1. Checkout code and install Node.js 22 **on GitHub Actions**.
-2. Install npm dependencies **on GitHub Actions**.
-3. Run `npm run build` **on GitHub Actions** (TypeScript check, Vite production build, and generated social preview).
-4. Verify the generated static files and deploy the `dist/` output to GitHub Pages.
-
-Website: **https://pulipulichen.github.io/silksong-dlc-countdown/**
-
-If needed, enable **Settings → Pages → Build and deployment → Source: GitHub Actions** once. You can also manually dispatch the workflow using **Actions → Deploy to GitHub Pages → Run workflow**.
-
-
-## Google Play AAB (GitHub Actions only)
-
-The Android release uses a Trusted Web Activity (TWA), opening the existing online-only website without widgets or notifications. The package ID is `io.github.pulipulichen.silksongdlccountdown`. Do not change it after publishing. No Android SDK or local compilation is needed.
-
-**One-time signing setup**: Create a long-lived upload keystore in a secure environment, store a backup outside GitHub, and add three repository **Settings → Secrets and variables → Actions → Secrets**:
-
-- `ANDROID_KEYSTORE_BASE64`: base64 encoding of the binary JKS/PKCS12 upload keystore (single line).
-- `ANDROID_KEYSTORE_PASSWORD`: the keystore password.
-- `ANDROID_KEY_PASSWORD`: the upload key password.
-
-The key alias must be **`upload`**. Example creation command (run once in a trusted environment; do not commit the resulting file):
-
-```sh
-keytool -genkeypair -v -keystore release.keystore -alias upload -keyalg RSA -keysize 2048 -validity 10000
-base64 -w0 release.keystore
-```
-
-Keep the original keystore and passwords safe. For Google Play App Signing, this is your upload key, not Google's app-signing key.
-
-Go to **Actions → Build Google Play AAB → Run workflow**, enter a unique, increasing `version_code` (1 for first upload, 2 for next, etc.) and `version_name`. After the job succeeds, download the **silksong-dlc-countdown-aab** artifact and upload its `.aab` to Google Play Console. Artifact retention is three days. The workflow intentionally does not publish to Google Play.
-
-**Required for full-screen TWA**: Configure Digital Asset Links on the website at `https://pulipulichen.github.io/.well-known/assetlinks.json` with `delegate_permission/common.handle_all_urls`, the package ID above, and the **Google Play app signing certificate SHA-256** (from Play Console → App integrity). GitHub Pages project sites cannot independently serve a root-origin `/.well-known/` file from this repository's subpath. The owner must configure the root origin (or move to a controlled custom domain). Without successful verification, Chrome may show its address bar instead of full-screen TWA. The upload-key fingerprint is not necessarily the Play app-signing fingerprint.
-
-## Optional local testing with Podman
-
-**Local testing is never required for deployment**. If you want a local preview, Podman builds everything inside a container, without installing Node.js or npm on the host:
-
-```bash
-podman build -t silksong-dlc-countdown -f Containerfile .
-podman run --rm -p 8080:80 silksong-dlc-countdown
-```
-
-Preview: http://localhost:8080/silksong-dlc-countdown/
-
-For Vite hot reload while editing source files, run `./start.sh` (Podman required). It builds the development image and serves the same preview URL with the project source mounted into the container.
-
-## Change built-in countdown dates or translations
-
-To configure the simulated time or DLC release status, edit the `simulationSettings` object in `src/main.ts` as described above. To change the built-in target dates or countdown logic, edit the relevant code in `src/main.ts`; edit `src/i18n.ts` for translations. Commit source changes to `main`, and GitHub Actions will build and deploy the site.
+- [Countdown dates and DLC configuration](./docs/en_us/configuration.md)
+- [Deployment and local testing](./docs/en_us/deploy.md)
+- [Google Play AAB configuration](./docs/en_us/google_play.md)
 
 **Disclaimer**: This is an unofficial fan project, unaffiliated with Team Cherry. Neither date is confirmed as the DLC release date.

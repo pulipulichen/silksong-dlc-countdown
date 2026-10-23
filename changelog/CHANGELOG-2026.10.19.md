@@ -58,3 +58,4 @@
 ## Documentation
 - Added synchronized English and Traditional Chinese setup guides covering the implemented release screen, explicit-time-zone release timestamp requirements, and local hot-reload workflow.
 - Corrected punctuation-adjacent Markdown emphasis in both READMEs so bold text renders consistently.
+- Moved maintainer-only date/DLC configuration, deployment/local testing, and Google Play AAB instructions from both READMEs into bilingual guides, linked from each README.
