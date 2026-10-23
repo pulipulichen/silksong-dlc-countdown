@@ -23,11 +23,10 @@ const formatter = new Intl.DateTimeFormat("en-GB", {
 
 type SimulationMode = "auto" | "custom";
 const simulationSettings: SimulationSettings = {
-  mode: "custom", // Use "custom" to preview the date below.
-  date: "2027-12-01", // Custom start date in YYYY-MM-DD format, at Adelaide midnight.
+  mode: "auto", // Use "custom" to preview the date below.
+  date: "2026-12-01", // Custom start date in YYYY-MM-DD format, at Adelaide midnight.
   dlcReleased: false, // Set to true to show the released celebration screen.
-  // dlcReleasedAt: "2027-10-01T00:00:00+09:30", // Adelaide midnight for the configured release date; replace with the confirmed release time when known.
-  dlcReleasedAt: "", // Adelaide midnight for the configured release date; replace with the confirmed release time when known.
+  dlcReleasedAt: "2027-10-01T00:00:00+09:30", // Adelaide midnight for the configured release date; replace with the confirmed release time when known.
   dlcAnnouncementUrl: "https://www.teamcherry.com.au/", // Full https:// URL of the release announcement. Leave empty to hide the button.
 };
 

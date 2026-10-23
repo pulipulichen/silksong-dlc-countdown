@@ -12,6 +12,7 @@
 
 ## Improved
 - Polished the animated sea scene and refined localized Silksong DLC branding across the page and sharing metadata.
+- Redrew the overdue mask as a detailed vector illustration and adjusted its layout for the updated artwork proportions.
 - Refined the silk cocoon cursor into a tapered, densely wound thread silhouette with fine overlapping ivory strands instead of broad geometric ribbons.
 - Kept native pointer affordances on interactive controls while hiding the custom cursor over them, and reduced ambient/card animation work.
 - Updated browser and social-share titles to clearly identify the *Sea of Sorrow* / Silksong DLC countdown, with localized browser titles.
@@ -31,6 +32,7 @@
 
 ## Changed
 - Replaced the reference-inspired flower cursor with an abstract, flat-color silk cocoon: separated ivory and mint ribbon shapes, no flower imagery, outlines, or gradients; retained immediate white click flashes and particle bursts.
+- Enabled live countdown mode by default and set the release-screen preview timestamp to October 1, 2027 at Adelaide midnight; the release preview remains disabled by default.
 - Automatically hide the November 27 countdown after that calendar day ends in Adelaide, and center the remaining December 31 card at its desktop width.
 - Reworded the localized introduction so it remains accurate with either one or two countdown cards.
 - Replaced the overdue character illustration with a stylized ivory theatrical mask, rainbow wig, and round red nose; updated the image descriptions in all four languages.
@@ -39,6 +41,7 @@
 - Removed the redundant `01 / 02` and `02 / 02` card counters.
 
 ## Added
+- Added screenshots of the unreleased, released, year-end countdown, and Switch 2 countdown states in `demo/`.
 - Added a localized overdue-unreleased screen with an original rainbow-wigged, red-nosed theatrical mask illustration, burgundy and ember styling, responsive elapsed-time card, and reduced-motion support. It activates only after the announced 2026 release window ends in Adelaide and never overrides the released screen.
 - Added dependency-free Node verification cases for the overdue boundary, live year rollover, simulated elapsed time, four-language switching, released-state priority, and Adelaide daylight-saving offsets.
 - Added a Podman-based Vite development image and `start.sh` launcher for source-mounted hot reload without host Node.js or npm.
