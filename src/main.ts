@@ -1,4 +1,5 @@
 import "./style.css";
+import { trackEvent } from "./analytics";
 import "./overdue.css";
 import "./released.css";
 import { startReleaseCelebration } from "./released-effects";
@@ -242,11 +243,27 @@ function setLocale(next: Locale): void {
 select?.addEventListener("change", () => {
   if (!select || !isLocale(select.value)) return;
   setLocale(select.value);
+  trackEvent("language_change", { language: select.value });
   try { localStorage.setItem("silksong-countdown-locale", select.value); }
   catch { /* Non-persistent selection remains functional. */ }
 });
 
 setLocale(locale);
+// Track meaningful outbound links without duplicating GA4's automatic click event.
+document.addEventListener("click", (event) => {
+  const target = event.target;
+  if (!(target instanceof Element)) return;
+  const anchor = target.closest<HTMLAnchorElement>("a[href]");
+  if (!anchor) return;
+  const url = new URL(anchor.href, location.href);
+  if (!["http:", "https:"].includes(url.protocol)) return;
+  const isTrailer = /(?:youtube\.com|youtu\.be)$/.test(url.hostname) && /qDFEeeLy6ws/.test(url.href);
+  trackEvent(isTrailer ? "trailer_click" : "source_click", {
+    link_url: url.href,
+    link_domain: url.hostname,
+    link_text: (anchor.textContent || "").trim().slice(0, 100),
+  });
+});
 startInstallPrompt(() => locale);
 
 function loop(): void {
