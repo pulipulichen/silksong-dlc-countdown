@@ -33,7 +33,16 @@
     gtag('js', new Date());
     gtag('config', 'G-Z2GG4RBN60');
   </script>
-</head>
+<style>
+.share-wrap{position:relative;justify-self:center;grid-column:2;grid-row:1}
+.share-button{cursor:pointer;border:1px solid rgba(230,195,137,.55);border-radius:7px;padding:7px 14px;background:rgba(10,35,42,.9);color:#f1d5a5;font:inherit;font-weight:700;white-space:nowrap}
+.share-button:hover,.share-button:focus-visible{background:#23464a;outline-color:#f1d5a5}
+.share-menu{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);min-width:155px;max-width:calc(100vw - 24px);padding:6px;background:#10272e;border:1px solid #bfa477;border-radius:9px;box-shadow:0 12px 35px #0009;z-index:30}
+.share-menu[hidden]{display:none}
+.share-menu button{display:block;width:100%;padding:10px 12px;border:0;border-radius:5px;text-align:left;background:transparent;color:#f1e5d0;cursor:pointer;font:inherit;white-space:nowrap}
+.share-menu button:hover,.share-menu button:focus-visible{background:#34535a}
+@media(max-width:800px){.share-wrap{grid-column:1/-1;grid-row:3;margin:6px auto}.footer p{grid-row:2}}
+</style></head>
 <body>
 <div id="app" class="site-shell">
   <canvas id="ambient" aria-hidden="true"></canvas>
@@ -174,6 +183,16 @@
     <footer class="footer">
       <div class="timezone"><i></i><span data-i18n="timeLabel" data-i18n-overdue="overdueTimeLabel">TIMED TO</span><strong>AUSTRALIA / ADELAIDE</strong><time id="adelaide-clock">--:--:--</time></div>
       <p data-i18n="disclaimer">Unofficial fan project · Not affiliated with or endorsed by Team Cherry · Dates may change.</p>
+      <div class="share-wrap">
+        <button id="share-button" class="share-button" type="button" aria-haspopup="true" aria-expanded="false">↗ <span id="share-label">Share</span></button>
+        <div id="share-menu" class="share-menu" hidden role="group" aria-label="Share">
+          <button type="button" data-share="facebook">Facebook</button>
+          <button type="button" data-share="threads">Threads</button>
+          <button type="button" data-share="x">X</button>
+          <button type="button" data-share="line">LINE</button>
+          <button type="button" data-share="copy" id="share-copy">Copy link</button>
+        </div>
+      </div>
       <div class="footer-credit">
         <span class="fan-signature" data-i18n="fanSignature">Fan: Pulipuli Chen</span>
         <a href="https://github.com/pulipulichen/silksong-dlc-countdown" target="_blank" rel="noopener noreferrer">GITHUB ↗</a>
@@ -182,5 +201,45 @@
   </div>
 </div>
 <script type="module" src="./src/main.ts"></script>
-</body>
+<script type="module">
+import { trackEvent } from "./src/analytics.ts";
+const button=document.getElementById("share-button");
+const menu=document.getElementById("share-menu");
+const label=document.getElementById("share-label");
+const copyButton=document.getElementById("share-copy");
+const names={en:["Share","Copy link","Copied!"],"zh-TW":["分享","複製連結","已複製！"],"zh-CN":["分享","复制链接","已复制！"],ja:["共有","リンクをコピー","コピーしました！"]};
+const t=()=>names[document.documentElement.lang]||names.en;
+const refresh=()=>{label.textContent=t()[0];copyButton.textContent=t()[1];menu.setAttribute("aria-label",t()[0]);};
+refresh();
+window.addEventListener("silksong-locale-changed",refresh);
+const close=()=>{menu.hidden=true;button.setAttribute("aria-expanded","false");};
+const toggle=()=>{menu.hidden=!menu.hidden;button.setAttribute("aria-expanded",String(!menu.hidden));};
+const shareUrl="https://pulipulichen.github.io/silksong-dlc-countdown/";
+const mobile=()=>window.matchMedia("(max-width: 800px)").matches;
+button.addEventListener("click",async()=>{
+  if(mobile()&&navigator.share){
+    try{await navigator.share({title:document.title,url:shareUrl});trackEvent("share",{method:"native",content_type:"website",item_id:"silksong-dlc-countdown"});}
+    catch(e){if(e.name!=="AbortError")toggle();}
+  }else toggle();
+});
+document.addEventListener("pointerdown",e=>{if(!e.target.closest(".share-wrap"))close();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){close();button.focus();}});
+menu.addEventListener("click",async e=>{
+  const item=e.target.closest("[data-share]");if(!item)return;
+  const method=item.dataset.share;
+  const url=encodeURIComponent(shareUrl),title=encodeURIComponent(document.title);
+  const destinations={
+    facebook:"https://www.facebook.com/sharer/sharer.php?u="+url,
+    threads:"https://www.threads.net/intent/post?text="+title+"%20"+url,
+    x:"https://twitter.com/intent/tweet?text="+title+"&url="+url,
+    line:"https://social-plugins.line.me/lineit/share?url="+url
+  };
+  if(method==="copy"){
+    try{await navigator.clipboard.writeText(shareUrl);copyButton.textContent=t()[2];setTimeout(refresh,1800);}
+    catch{window.prompt(t()[1],shareUrl);}
+  }else if(destinations[method])window.open(destinations[method],"_blank","noopener,noreferrer");
+  trackEvent("share",{method,content_type:"website",item_id:"silksong-dlc-countdown"});
+  close();
+});
+</script></body>
 </html>
