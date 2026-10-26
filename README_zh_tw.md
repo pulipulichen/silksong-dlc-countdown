@@ -53,7 +53,7 @@
 
 | 目標時間（澳洲／阿德雷德午夜） | 說明 |
 | --- | --- |
-| **2026-12-31 00:00** | 粉絲選定的《Sea of Sorrow》DLC 年底標記。Team Cherry 宣布免費擴充內容預計於 **2026** 推出，**並未確認 12 月 31 日為發售日**。[Team Cherry 公告](https://www.teamcherry.com.au/blog/holiday2025) · [DLC 預告（0:28）](https://youtu.be/qDFEeeLy6ws?t=28)。 |
+| **2026-12-31 00:00** | 粉絲選定的《Sea of Sorrow》DLC 年底標記。Team Cherry 宣布免費擴充內容預計於 **2026** 推出，**並未確認 12 月 31 日為發售日**。[Team Cherry 公告](https://www.teamcherry.com.au/blog/holiday2025) · [DLC 預告](https://youtu.be/qDFEeeLy6ws)。 |
 | **2026-11-27 00:00** | 零售商標示的延期後 **Switch 2 實體版**發售日期。DLC 是否會同日推出仍是**未經確認的粉絲推測**。[零售商頁面](https://www.tvgame.com.tw/SalePage/Index/11873934?lang=zh-TW)。 |
 
 兩個倒數都使用 IANA **Australia/Adelaide** 時區，並包含日光節約時間。日期過後，計時器會顯示日期已到，並改為累計已經過的天數、時數、分鐘與秒數。
