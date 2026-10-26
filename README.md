@@ -50,7 +50,7 @@ This playful overdue state reflects an unfulfilled anticipated *year*, **not** a
 
 | Target at Australia/Adelaide midnight | What it means |
 | --- | --- |
-| **2026-12-31 00:00** | Fan-selected year-end marker for the *Sea of Sorrow* DLC. Team Cherry announced a free expansion planned for **2026**, **not** an official December 31 release date. [Team Cherry announcement](https://www.teamcherry.com.au/blog/holiday2025) · [DLC teaser (0:28)](https://youtu.be/qDFEeeLy6ws?t=28). |
+| **2026-12-31 00:00** | Fan-selected year-end marker for the *Sea of Sorrow* DLC. Team Cherry announced a free expansion planned for **2026**, **not** an official December 31 release date. [Team Cherry announcement](https://www.teamcherry.com.au/blog/holiday2025) · [DLC teaser](https://youtu.be/qDFEeeLy6ws). |
 | **2026-11-27 00:00** | Retailer-listed date for the postponed **Switch 2 physical edition**. Any DLC launch on the same day is **unconfirmed fan speculation**. [Retailer listing](https://www.tvgame.com.tw/SalePage/Index/11873934?lang=zh-TW). |
 
 Both counters use the IANA **Australia/Adelaide** time zone, including daylight saving. When a date passes, its timer displays an arrival message and counts **up** (days / hours / minutes / seconds).
