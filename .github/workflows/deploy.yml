@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
   pages: write
   id-token: write
 
@@ -56,10 +57,39 @@ jobs:
             exit 1
           fi
       - name: Upload compiled site to GitHub Pages
+        id: pages-artifact
         uses: actions/upload-pages-artifact@v4
         with:
           path: dist
           retention-days: 3
+      - name: Wait for the Pages artifact to be listed
+        timeout-minutes: 2
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_ID: ${{ steps.pages-artifact.outputs.artifact_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ ! "$ARTIFACT_ID" =~ ^[0-9]+$ ]]; then
+            echo "::error::The Pages upload did not return an artifact ID."
+            exit 1
+          fi
+
+          # Upload finalization can precede visibility in the artifact listing.
+          endpoint="repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/artifacts?name=github-pages"
+          for attempt in {1..12}; do
+            if artifact_ids=$(gh api "$endpoint" --jq '.artifacts[] | select(.expired == false) | .id') &&
+              grep -Fxq "$ARTIFACT_ID" <<< "$artifact_ids"; then
+              echo "Pages artifact $ARTIFACT_ID is listed for run $GITHUB_RUN_ID."
+              exit 0
+            fi
+            if (( attempt < 12 )); then
+              echo "Waiting for Pages artifact $ARTIFACT_ID (attempt $attempt of 12)."
+              sleep 5
+            fi
+          done
+          echo "::error::Pages artifact $ARTIFACT_ID did not appear in the listing for run $GITHUB_RUN_ID."
+          exit 1
       - name: Deploy compiled site
         id: deployment
         uses: actions/deploy-pages@v4
