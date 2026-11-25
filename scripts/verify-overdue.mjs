@@ -33,7 +33,7 @@ function setup(settings = {}, initialLocale = "zh-TW") {
     if (!nodes.has(selector)) nodes.set(selector, element());
     return nodes.get(selector);
   };
-  for (const id of ["dlc", "switch"]) {
+  for (const id of ["dlc", "cherry"]) {
     const card = get('[data-card="' + id + '"]');
     const timer = get('[data-timer="' + id + '"]');
     timer.closest = () => card;
@@ -51,11 +51,12 @@ function setup(settings = {}, initialLocale = "zh-TW") {
     Date: class extends Date { static now() { return now; } },
     texts, isLocale, getInitialLocale: () => initialLocale,
     testSettings: { mode: "custom", date: "2027-12-01", dlcReleased: false, ...settings },
-    startSilkCursor() {}, startInstallPrompt() {}, startReleaseCelebration() {},
+    startSilkCursor() {}, startInstallPrompt() {}, startReleaseCelebration() {}, trackEvent() {},
     localStorage: { setItem: (key, value) => storage.set(key, value) },
     document: {
       documentElement: { dataset: {}, style: { setProperty() {} } },
       querySelector: get,
+      addEventListener() {},
       querySelectorAll(selector) {
         if (selector === "[data-i18n]") return bindings;
         if (selector === "[data-i18n-alt]") return [alt];
@@ -83,7 +84,7 @@ test("the configured December 2027 preview counts 334 days from January 1, not 3
   assert.equal(page.root.dataset.dlcOverdue, "true");
   assert.equal(page.get(".overdue-art").hidden, false);
   assert.equal(page.get(".overdue-since").hidden, false);
-  assert.equal(page.get('[data-card="switch"]').hidden, true);
+  assert.equal(page.get('[data-card="cherry"]').hidden, true);
   assert.equal(page.digit("days"), "334");
   assert.equal(page.digit("hours"), "00");
   assert.equal(page.digit("seconds"), "00");
@@ -164,15 +165,15 @@ test("four-digit day counts are preserved rather than truncated", () => {
   assert.equal(page.digit("days"), "1096");
 });
 
-test("the pre-November-28 layout still shows both original cards", () => {
+test("Cherry Time and DLC are both visible before the presentation", () => {
   const page = setup({ date: "2026-11-27" });
   assert.equal(page.root.dataset.dlcOverdue, "false");
-  assert.equal(page.get('[data-card="switch"]').hidden, false);
+  assert.equal(page.get('[data-card="cherry"]').hidden, false);
   assert.equal(page.text("dlcTitle"), texts["zh-TW"].dlcTitle);
 });
 
-test("the default release timestamp stays unset until an actual release time is configured", () => {
-  const page = setup({ dlcReleased: true });
+test("an unset release timestamp stays unset until an actual release time is configured", () => {
+  const page = setup({ dlcReleased: true, dlcReleasedAt: "" });
   for (const unit of ["days", "hours", "minutes", "seconds"]) assert.equal(page.digit(unit), "--");
   assert.equal(page.text("dlcDateNote"), texts["zh-TW"].releasedDateUnknown);
   assert.equal(page.get("#dlc-release-time").hidden, true);
@@ -199,10 +200,10 @@ test("UTC timestamps with milliseconds match explicit Adelaide offsets", () => {
   assert.equal(page.digit("minutes"), "30");
 });
 
-test("auto mode uses real time and hides the speculative Switch card after release", () => {
+test("auto mode uses real time and hides the Cherry Time card after DLC release", () => {
   const page = setup({ mode: "auto", dlcReleased: true, dlcReleasedAt: "2026-10-22T00:00:00Z" });
   assert.equal(page.digit("days"), "01");
-  assert.equal(page.get('[data-card="switch"]').hidden, true);
+  assert.equal(page.get('[data-card="cherry"]').hidden, true);
   assert.equal(page.root.dataset.dlcOverdue, "false");
 });
 
@@ -260,4 +261,22 @@ test("the Adelaide boundary follows both summer and winter UTC offsets", () => {
   const july = new Script("adelaideMidnight(2027, 7, 1)").runInContext(page.context);
   assert.equal(new Date(january).toISOString(), "2026-12-31T13:30:00.000Z");
   assert.equal(new Date(july).toISOString(), "2027-06-30T14:30:00.000Z");
+});
+
+
+test("Cherry Time counts down to 23:00 Taipei time and stays visible through its Adelaide date", () => {
+  const page = setup({ date: "2026-11-28" });
+  const digit = (unit) => page.get('cherry [data-unit="' + unit + '"]').textContent;
+  assert.equal(new Script("target.cherry").runInContext(page.context), Date.parse("2026-11-27T15:00:00Z"));
+  assert.equal(page.get('[data-card="cherry"]').hidden, false);
+  assert.equal(digit("hours"), "01");
+  assert.equal(digit("minutes"), "30");
+  page.advance(5400000);
+  assert.equal(digit("hours"), "00");
+  assert.equal(digit("minutes"), "00");
+  assert.equal(page.get('[data-card="cherry"]').dataset.expired, "true");
+  page.advance(1000);
+  assert.equal(digit("seconds"), "01");
+  page.advance(86400000 - 5400000 - 1000);
+  assert.equal(page.get('[data-card="cherry"]').hidden, true);
 });

@@ -7,7 +7,7 @@ import { startSilkCursor } from "./flower-cursor";
 import { startInstallPrompt } from "./install-prompt";
 import { getInitialLocale, isLocale, texts, type Locale, type TextKey } from "./i18n";
 
-type TimerId = "dlc" | "switch";
+type TimerId = "dlc" | "cherry";
 
 type SimulationSettings = {
   mode: SimulationMode;
@@ -51,11 +51,11 @@ export function adelaideMidnight(year: number, month: number, day: number): numb
 
 const target: Record<TimerId, number> = {
   dlc: adelaideMidnight(2026, 12, 31),
-  switch: adelaideMidnight(2026, 11, 27),
+  cherry: Date.parse("2026-11-27T23:00:00+08:00"), // November 28, 01:30 in Adelaide.
 };
-// Keep the November 27 card through that Adelaide calendar day.
-const switchCardHideAt = adelaideMidnight(2026, 11, 28);
-const switchCard = document.querySelector<HTMLElement>('[data-card="switch"]');
+// Keep the Cherry Time card through the event's Adelaide calendar day.
+const cherryCardHideAt = adelaideMidnight(2026, 11, 29);
+const cherryCard = document.querySelector<HTMLElement>('[data-card="cherry"]');
 // The announced year ends at the next Adelaide midnight, not the start of December 31.
 const overdueStartsAt = adelaideMidnight(2027, 1, 1);
 const overdueArt = document.querySelector<HTMLElement>(".overdue-art");
@@ -142,7 +142,7 @@ const select = document.querySelector<HTMLSelectElement>("#locale");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const timers: Record<TimerId, HTMLElement | null> = {
   dlc: document.querySelector('[data-timer="dlc"]'),
-  switch: document.querySelector('[data-timer="switch"]'),
+  cherry: document.querySelector('[data-timer="cherry"]'),
 };
 
 function changeDigit(element: HTMLElement | null, value: number | null): void {
@@ -159,7 +159,7 @@ function changeDigit(element: HTMLElement | null, value: number | null): void {
 
 function update(): void {
   const now = currentTime();
-  if (switchCard) switchCard.hidden = simulationSettings.dlcReleased || now >= switchCardHideAt;
+  if (cherryCard) cherryCard.hidden = simulationSettings.dlcReleased || now >= cherryCardHideAt;
   const overdue = now >= overdueStartsAt && !simulationSettings.dlcReleased;
   if (overdue !== isOverdue) {
     isOverdue = overdue;
@@ -167,7 +167,7 @@ function update(): void {
     window.dispatchEvent(new Event("silksong-theme-changed"));
   }
   const copy = texts[locale];
-  (["dlc", "switch"] as const).forEach((id) => {
+  (["dlc", "cherry"] as const).forEach((id) => {
     const timer = timers[id];
     if (!timer) return;
     const released = id === "dlc" && simulationSettings.dlcReleased;
@@ -225,7 +225,7 @@ function applyPresentation(): void {
   }
   if (select) { select.value = locale; select.setAttribute("aria-label", copy.language); }
   timers.dlc?.setAttribute("aria-label", simulationSettings.dlcReleased ? copy.releasedAria : isOverdue ? copy.overdueAria : copy.dlcAria);
-  timers.switch?.setAttribute("aria-label", copy.switchAria);
+  timers.cherry?.setAttribute("aria-label", copy.cherryAria);
   const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
   if (description) description.content = simulationSettings.dlcReleased ? copy.releasedIntro : isOverdue ? copy.overdueIntro : copy.intro;
   const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');

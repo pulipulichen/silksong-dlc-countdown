@@ -16,17 +16,19 @@ What if the wait continues? What if the DLC finally arrives? This site is design
 
 ### 1. Two dates, one long wait — dual countdown
 
-![Two side-by-side countdowns for the Switch 2 physical edition and Sea of Sorrow DLC](./demo/demo_wait_switch_2.png)
+![Historical dual-countdown layout preview](./demo/demo_wait_switch_2.png)
 
-Before the end of November 2026, two cards appear side by side. The first watches **November 27, 2026**, the retailer-listed Switch 2 physical-edition date; the second watches the fan-selected **December 31, 2026** year-end DLC marker. Both tick down in days, hours, minutes, and seconds.
+*Historical screenshot: the first card now counts down to Cherry Time.*
 
-The Switch 2 date is **not** an announced DLC release date. Its connection to the DLC is speculation.
+Two cards appear side by side. The first watches **Cherry Time on November 27, 2026, at 23:00 Taipei time (November 28, 01:30 Adelaide time)**; the second watches the fan-selected **December 31, 2026** year-end DLC marker. Both tick down in days, hours, minutes, and seconds.
+
+Cherry Time is a special presentation with announcements and a Sea of Sorrow update, **not** a confirmed DLC release date. [Watch on YouTube](https://www.youtube.com/watch?v=M-QUgdcBpZU).
 
 ### 2. One countdown remains — the end of 2026 approaches
 
 ![Single centered Sea of Sorrow DLC countdown card](./demo/demo_wait_2026_end.png)
 
-Beginning **November 28, 2026** in Adelaide, the Switch 2 reference card disappears. The remaining card takes center stage as fans watch the final days of the year Team Cherry targeted for the free expansion. The moving ocean backdrop keeps the anticipation alive.
+Beginning **November 29, 2026** in Adelaide, the Cherry Time card disappears. The remaining card takes center stage as fans watch the final days of the year Team Cherry targeted for the free expansion. The moving ocean backdrop keeps the anticipation alive.
 
 **December 31 is a fan-selected year-end checkpoint, not a confirmed launch date.**
 
@@ -48,12 +50,12 @@ This playful overdue state reflects an unfulfilled anticipated *year*, **not** a
 
 ## The two dates
 
-| Target at Australia/Adelaide midnight | What it means |
+| Target time | What it means |
 | --- | --- |
 | **2026-12-31 00:00** | Fan-selected year-end marker for the *Sea of Sorrow* DLC. Team Cherry announced a free expansion planned for **2026**, **not** an official December 31 release date. [Team Cherry announcement](https://www.teamcherry.com.au/blog/holiday2025) · [DLC teaser](https://youtu.be/qDFEeeLy6ws). |
-| **2026-11-27 00:00** | Retailer-listed date for the postponed **Switch 2 physical edition**. Any DLC launch on the same day is **unconfirmed fan speculation**. [Retailer listing](https://www.tvgame.com.tw/SalePage/Index/11873934?lang=zh-TW). |
+| **2026-11-27 23:00 UTC+8** (Nov 28, 01:30 Adelaide) | Cherry Time presentation, including a Sea of Sorrow update; not a confirmed DLC release date. [YouTube](https://www.youtube.com/watch?v=M-QUgdcBpZU). |
 
-Both counters use the IANA **Australia/Adelaide** time zone, including daylight saving. When a date passes, its timer displays an arrival message and counts **up** (days / hours / minutes / seconds).
+The DLC year-end marker uses the IANA **Australia/Adelaide** time zone, including daylight saving. Cherry Time uses an explicit UTC+8 offset so every visitor counts down to the same instant. When a date passes, its timer displays an arrival message and counts **up** (days / hours / minutes / seconds).
 
 ## Installable PWA (online only)
 
