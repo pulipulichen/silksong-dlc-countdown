@@ -1,4 +1,5 @@
 import { type Locale } from "./i18n";
+import { trackEvent } from "./analytics";
 
 type InstallPromptEvent = Event & {
   prompt: () => Promise<void>;
@@ -62,6 +63,7 @@ export function startInstallPrompt(getLocale: () => Locale): void {
         const event = deferred;
         if (!event) return;
         deferred = null;
+        trackEvent("pwa_install_click", { install_method: "browser_prompt" });
         hide();
         try {
           await event.prompt();
@@ -89,7 +91,7 @@ export function startInstallPrompt(getLocale: () => Locale): void {
     hide();
     render();
   });
-  window.addEventListener("appinstalled", () => { installed = true; deferred = null; hide(); });
+  window.addEventListener("appinstalled", () => { trackEvent("pwa_install_success", { install_method: "browser_prompt" }); installed = true; deferred = null; hide(); });
   window.addEventListener("silksong-locale-changed", () => { hide(); render(); });
   if (ios && safari) render();
 }

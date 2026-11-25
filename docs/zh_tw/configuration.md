@@ -33,12 +33,12 @@ const simulationSettings: SimulationSettings = {
 內建目標日期與相關時間界線定義於 `src/main.ts`：
 
 - DLC 年底標記為 **2026 年 12 月 31 日阿德雷德午夜**。
-- 零售商標示的 Switch 2 實體版日期為 **2026 年 11 月 27 日阿德雷德午夜**。對應卡片會在下一個阿德雷德午夜（11 月 28 日）隱藏。
+- Cherry Time 特別發表會於 **2026 年 11 月 27 日台灣時間 23:00（UTC+8）** 開始，對應阿德雷德 11 月 28 日 01:30。卡片在阿德雷德 11 月 29 日午夜隱藏。
 - 逾期計時從 **2027 年 1 月 1 日阿德雷德午夜**開始。
 
-這些日期透過 `adelaideMidnight` 函式建立，會依 `Australia/Adelaide` 時區及日光節約時間計算。修改目標日期時，也請檢查相關的卡片隱藏／逾期時間界線，以及 `src/i18n.ts` 中與日期相關的文字，確保畫面資訊一致。
+DLC 與隱藏卡片的時間界線透過 `adelaideMidnight` 函式建立，會依 `Australia/Adelaide` 時區及日光節約時間計算；Cherry Time 則使用明確的 UTC+8 時間戳記。修改目標日期時，也請檢查相關的卡片隱藏／逾期時間界線，以及 `src/i18n.ts` 中與日期相關的文字，確保畫面資訊一致。
 
-DLC 日期是粉絲選定的年底標記，並非官方確認的發售日。Switch 2 日期來自零售商標示，該日期與 DLC 的關聯也未經證實。
+DLC 日期是粉絲選定的年底標記，並非官方確認的發售日。Cherry Time 為包含 DLC 最新消息的特別發表會，並非確定發售日。[YouTube](https://www.youtube.com/watch?v=M-QUgdcBpZU)。
 
 ## 套用變更
 
