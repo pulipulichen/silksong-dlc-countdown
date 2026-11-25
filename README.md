@@ -16,9 +16,7 @@ What if the wait continues? What if the DLC finally arrives? This site is design
 
 ### 1. Two dates, one long wait — dual countdown
 
-![Historical dual-countdown layout preview](./demo/demo_wait_switch_2.png)
-
-*Historical screenshot: the first card now counts down to Cherry Time.*
+![Cherry Time and Sea of Sorrow dual countdown](./demo/demo_wait_cheery_time.png)
 
 Two cards appear side by side. The first watches **Cherry Time on November 27, 2026, at 23:00 Taipei time (November 28, 01:30 Adelaide time)**; the second watches the fan-selected **December 31, 2026** year-end DLC marker. Both tick down in days, hours, minutes, and seconds.
 

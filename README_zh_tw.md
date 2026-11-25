@@ -16,9 +16,7 @@
 
 ### 1. 雙重倒數：兩個值得關注的日期
 
-![雙倒數版面歷史截圖](./demo/demo_wait_switch_2.png)
-
-*歷史截圖：第一張卡片現已改為 Cherry Time 倒數。*
+![Cherry Time 與悲愴之海雙倒數畫面](./demo/demo_wait_cheery_time.png)
 
 在 Cherry Time 活動期間及之前，畫面會同時顯示兩張倒數卡片：
 
