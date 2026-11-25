@@ -16,6 +16,8 @@ What if the wait continues? What if the DLC finally arrives? This site is design
 
 ### 1. Two dates, one long wait — dual countdown
 
+
+
 ![Two side-by-side countdowns for the Switch 2 physical edition and Sea of Sorrow DLC](./demo/demo_wait_switch_2.png)
 
 Before the end of November 2026, two cards appear side by side. The first watches **November 27, 2026**, the retailer-listed Switch 2 physical-edition date; the second watches the fan-selected **December 31, 2026** year-end DLC marker. Both tick down in days, hours, minutes, and seconds.
