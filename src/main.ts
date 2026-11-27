@@ -11,6 +11,7 @@ type SimulationSettings = {
   mode: SimulationMode;
   date: string;
   dlcReleased: boolean;
+  dlcAutoReleaseAt: string;
   dlcReleasedAt: string;
   dlcAnnouncementUrl: string;
 };
@@ -24,8 +25,9 @@ type SimulationMode = "auto" | "custom";
 const simulationSettings: SimulationSettings = {
   mode: "auto", // Use "custom" to preview the date below.
   date: "2026-12-01", // Custom start date in YYYY-MM-DD format, at Adelaide midnight.
-  dlcReleased: false, // Set to true to show the released celebration screen.
-  dlcReleasedAt: "2027-10-01T00:00:00+09:30", // Adelaide midnight for the configured release date; replace with the confirmed release time when known.
+  dlcReleased: false, // Manual override for preview or an earlier confirmed release.
+  dlcAutoReleaseAt: "2026-12-12T00:00:00+08:00", // Site-side fallback; midnight in Taiwan, not an official launch-time claim.
+  dlcReleasedAt: "2026-12-12T00:00:00+08:00", // Elapsed-time origin; replace with the actual launch time if confirmed earlier.
   dlcAnnouncementUrl: "https://www.teamcherry.com.au/", // Full https:// URL of the release announcement. Leave empty to hide the button.
 };
 
@@ -80,6 +82,13 @@ function parseReleaseTime(value: string): number | null {
   return Number.isFinite(timestamp) ? timestamp : null;
 }
 
+const autoReleaseAt = parseReleaseTime(simulationSettings.dlcAutoReleaseAt);
+const releasedAt = parseReleaseTime(simulationSettings.dlcReleasedAt);
+
+function hasBeenReleased(now: number): boolean {
+  return simulationSettings.dlcReleased || (autoReleaseAt !== null && now >= autoReleaseAt);
+}
+
 function parseAnnouncementUrl(value: string): string | null {
   try {
     const url = new URL(value);
@@ -89,7 +98,6 @@ function parseAnnouncementUrl(value: string): string | null {
   }
 }
 
-const releasedAt = parseReleaseTime(simulationSettings.dlcReleasedAt);
 const announcementUrl = parseAnnouncementUrl(simulationSettings.dlcAnnouncementUrl);
 const releasedTextKeys: Partial<Record<TextKey, TextKey>> = {
   heroEnd: "releasedHeroEnd",
@@ -104,30 +112,10 @@ const releasedTextKeys: Partial<Record<TextKey, TextKey>> = {
 
 const releaseTime = document.querySelector<HTMLTimeElement>("#dlc-release-time");
 const dlcReference = document.querySelector<HTMLAnchorElement>('[data-card="dlc"] [data-announcement-link]');
-document.documentElement.dataset.dlcReleased = String(simulationSettings.dlcReleased);
-document.querySelectorAll<HTMLElement>("[data-release-only]").forEach((element) => {
-  element.hidden = !simulationSettings.dlcReleased;
-});
-document.querySelectorAll<HTMLElement>("[data-countdown-only]").forEach((element) => {
-  element.hidden = simulationSettings.dlcReleased;
-});
-if (releaseTime) {
-  releaseTime.hidden = !simulationSettings.dlcReleased || releasedAt === null;
-  if (releasedAt !== null) releaseTime.dateTime = new Date(releasedAt).toISOString();
-}
-if (simulationSettings.dlcReleased) {
-  if (dlcReference) {
-    dlcReference.hidden = announcementUrl === null;
-    if (announcementUrl !== null) dlcReference.href = announcementUrl;
-  }
-  if (releasedAt === null) {
-    console.warn('Set simulationSettings.dlcReleasedAt to the actual release time, including Z or a UTC offset (YYYY-MM-DDTHH:mm:ss+HH:mm). The elapsed timer shows -- until a valid time is provided.');
-  }
-  const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
-  if (themeColor) themeColor.content = "#103e47";
-}
 
-let isOverdue = currentTime() >= overdueStartsAt && !simulationSettings.dlcReleased;
+const initialTime = currentTime();
+let isReleased = hasBeenReleased(initialTime);
+let isOverdue = initialTime >= overdueStartsAt && !isReleased;
 let locale: Locale = getInitialLocale();
 const select = document.querySelector<HTMLSelectElement>("#locale");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -147,15 +135,19 @@ function changeDigit(element: HTMLElement | null, value: number | null): void {
 
 function update(): void {
   const now = currentTime();
-  const overdue = now >= overdueStartsAt && !simulationSettings.dlcReleased;
-  if (overdue !== isOverdue) {
+  const releasedNow = hasBeenReleased(now);
+  const overdue = now >= overdueStartsAt && !releasedNow;
+  if (releasedNow !== isReleased || overdue !== isOverdue) {
+    const justReleased = releasedNow && !isReleased;
+    isReleased = releasedNow;
     isOverdue = overdue;
     applyPresentation();
     window.dispatchEvent(new Event("silksong-theme-changed"));
+    if (justReleased) startReleaseCelebration();
   }
   const copy = texts[locale];
   if (dlcTimer) {
-    const released = simulationSettings.dlcReleased;
+    const released = isReleased;
     const origin = released ? releasedAt : isOverdue ? overdueStartsAt : dlcTarget;
     const duration = origin === null ? null : Math.floor(
       (released ? Math.max(0, now - origin) : Math.abs(now - origin)) / 1000,
@@ -187,33 +179,48 @@ function update(): void {
 
 function applyPresentation(): void {
   const copy = texts[locale];
+  document.documentElement.dataset.dlcReleased = String(isReleased);
   document.documentElement.dataset.dlcOverdue = String(isOverdue);
+  document.querySelectorAll<HTMLElement>("[data-release-only]").forEach((element) => {
+    element.hidden = !isReleased;
+  });
+  document.querySelectorAll<HTMLElement>("[data-countdown-only]").forEach((element) => {
+    element.hidden = isReleased;
+  });
+  if (releaseTime) {
+    releaseTime.hidden = !isReleased || releasedAt === null;
+    if (releasedAt !== null) releaseTime.dateTime = new Date(releasedAt).toISOString();
+  }
+  if (dlcReference) {
+    dlcReference.hidden = !isReleased || announcementUrl === null;
+    if (isReleased && announcementUrl !== null) dlcReference.href = announcementUrl;
+  }
   if (overdueArt) overdueArt.hidden = !isOverdue;
   if (overdueSince) overdueSince.hidden = !isOverdue;
-  document.title = simulationSettings.dlcReleased ? copy.releasedPageTitle : isOverdue ? copy.overduePageTitle : copy.pageTitle;
+  document.title = isReleased ? copy.releasedPageTitle : isOverdue ? copy.overduePageTitle : copy.pageTitle;
   document.querySelectorAll<HTMLElement>("[data-i18n]").forEach((element) => {
     const key = element.dataset.i18n as TextKey | undefined;
     if (!key || !(key in copy)) return;
     const overdueKey = element.dataset.i18nOverdue as TextKey | undefined;
-    const translatedKey = simulationSettings.dlcReleased ? releasedTextKeys[key] ?? key : isOverdue && overdueKey ? overdueKey : key;
+    const translatedKey = isReleased ? releasedTextKeys[key] ?? key : isOverdue && overdueKey ? overdueKey : key;
     element.textContent = copy[translatedKey];
   });
   document.querySelectorAll<HTMLImageElement>("[data-i18n-alt]").forEach((element) => {
     const key = element.dataset.i18nAlt as TextKey | undefined;
     if (key && key in copy) element.alt = copy[key];
   });
-  if (releaseTime && releasedAt !== null) {
+  if (releaseTime && isReleased && releasedAt !== null) {
     releaseTime.textContent = new Intl.DateTimeFormat(locale === "en" ? "en-GB" : locale, {
       timeZone: zone, year: "numeric", month: "2-digit", day: "2-digit",
       hour: "2-digit", minute: "2-digit", second: "2-digit", hourCycle: "h23", timeZoneName: "shortOffset",
     }).format(releasedAt);
   }
   if (select) { select.value = locale; select.setAttribute("aria-label", copy.language); }
-  dlcTimer?.setAttribute("aria-label", simulationSettings.dlcReleased ? copy.releasedAria : isOverdue ? copy.overdueAria : copy.dlcAria);
+  dlcTimer?.setAttribute("aria-label", isReleased ? copy.releasedAria : isOverdue ? copy.overdueAria : copy.dlcAria);
   const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
-  if (description) description.content = simulationSettings.dlcReleased ? copy.releasedIntro : isOverdue ? copy.overdueIntro : copy.intro;
+  if (description) description.content = isReleased ? copy.releasedIntro : isOverdue ? copy.overdueIntro : copy.intro;
   const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
-  if (themeColor) themeColor.content = simulationSettings.dlcReleased ? "#103e47" : isOverdue ? "#241620" : "#061117";
+  if (themeColor) themeColor.content = isReleased ? "#103e47" : isOverdue ? "#241620" : "#061117";
 }
 
 function setLocale(next: Locale): void {
