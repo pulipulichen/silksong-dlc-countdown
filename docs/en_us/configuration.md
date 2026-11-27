@@ -32,13 +32,13 @@ To return to live time, change `mode` back to `"auto"`. Save the code and rebuil
 
 The built-in target dates and related boundaries are defined in `src/main.ts`:
 
-- The DLC year-end marker is **December 31, 2026, at Adelaide midnight**.
-- Cherry Time begins **November 27, 2026, at 23:00 Taipei time (UTC+8)**, equivalent to November 28, 01:30 in Adelaide. Its card is hidden at Adelaide midnight on November 29.
-- The overdue timer starts at **January 1, 2027, at Adelaide midnight**.
+- The announced Sea of Sorrow release date is **December 11, 2026**. Because Team Cherry did not announce a launch hour or time zone, the countdown uses **00:00 Australia/Adelaide** only as the start-of-date boundary; it does not claim the DLC launches at midnight.
+- Cherry Time began **November 27, 2026, at 23:00 Taipei time (UTC+8)**, equivalent to November 28, 01:30 in Adelaide. Its archive card is hidden at Adelaide midnight on November 29.
+- If the DLC has not been marked as released, the overdue timer starts at **December 12, 2026, at Adelaide midnight**.
 
 The DLC and hide boundaries use the `adelaideMidnight` helper, which applies the `Australia/Adelaide` time zone and its daylight-saving rules. Cherry Time uses an explicit UTC+8 timestamp. When changing a target, also review the related hide/overdue boundaries and date-specific copy in `src/i18n.ts` so the display remains consistent.
 
-The DLC date is a fan-selected year-end marker, not an officially confirmed release date. Cherry Time is a special presentation with a DLC update, not a confirmed DLC release date. [YouTube](https://www.youtube.com/watch?v=M-QUgdcBpZU).
+Team Cherry announced **December 11, 2026** as the Sea of Sorrow release date during Cherry Time. The presentation did not announce an exact launch time or time zone. The public countdown therefore uses Adelaide midnight as a calendar boundary only. [Watch Cherry Time on YouTube](https://www.youtube.com/watch?v=M-QUgdcBpZU).
 
 ## Apply changes
 
