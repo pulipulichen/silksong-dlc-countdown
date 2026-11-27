@@ -1,6 +1,8 @@
 # 2026.11.23 (Week 4)
 
 ## Changed
+- Added direct links to Team Cherry's original Sea of Sorrow teaser and the new launch trailer.
+- Extended the countdown through the full December 11 release date; the deadline and overdue boundary are now December 12, 2026, 00:00 Australia/Adelaide.
 - Replaced the historical Switch 2 dual-countdown screenshot in both READMEs with the current Cherry Time and Sea of Sorrow screenshot.
 - Refreshed the year-end, release celebration, and overdue demo screenshots.
 

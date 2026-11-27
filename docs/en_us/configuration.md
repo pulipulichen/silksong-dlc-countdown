@@ -32,8 +32,8 @@ To return to live time, change `mode` back to `"auto"`. Save the code and rebuil
 
 The built-in target dates and related boundaries are defined in `src/main.ts`:
 
-- The announced Sea of Sorrow release date is **December 11, 2026**. Because Team Cherry did not announce a launch hour or time zone, the countdown uses **00:00 Australia/Adelaide** only as the start-of-date boundary; it does not claim the DLC launches at midnight.
-- If the DLC has not been marked as released, the overdue timer starts at **December 12, 2026, at Adelaide midnight**.
+- The announced Sea of Sorrow release date is **December 11, 2026**. The countdown covers that full calendar day and reaches its deadline at **December 12, 2026, 00:00 Australia/Adelaide** (the instant December 11 ends). This is a countdown boundary, not an announced DLC launch time.
+- If the DLC has not been marked as released by that deadline, the overdue timer starts at the same boundary.
 
 The DLC target and overdue boundary use the `adelaideMidnight` helper, which applies the `Australia/Adelaide` time zone and its daylight-saving rules. When changing the release date, also review the overdue boundary and date-specific copy in `src/i18n.ts` so the single countdown remains consistent.
 

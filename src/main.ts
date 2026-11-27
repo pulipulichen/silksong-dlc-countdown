@@ -47,9 +47,9 @@ export function adelaideMidnight(year: number, month: number, day: number): numb
   return current;
 }
 
-const dlcTarget = adelaideMidnight(2026, 12, 11);
-// If the announced December 11 release date passes without a release, start the overdue state on December 12.
-const overdueStartsAt = adelaideMidnight(2026, 12, 12);
+const dlcTarget = adelaideMidnight(2026, 12, 12);
+// Count through the full December 11 release date; overdue begins at the same Adelaide-midnight deadline.
+const overdueStartsAt = dlcTarget;
 const overdueArt = document.querySelector<HTMLElement>(".overdue-art");
 const overdueSince = document.querySelector<HTMLElement>(".overdue-since");
 
@@ -98,13 +98,12 @@ const releasedTextKeys: Partial<Record<TextKey, TextKey>> = {
   dlcTitle: "releasedTitle",
   dlcDateNote: releasedAt === null ? "releasedDateUnknown" : "releasedDateNote",
   dlcDescription: "releasedDescription",
-  teaser: "releasedAnnouncement",
   timeLabel: "releasedTimeLabel",
   disclaimer: "releasedDisclaimer",
 };
 
 const releaseTime = document.querySelector<HTMLTimeElement>("#dlc-release-time");
-const dlcReference = document.querySelector<HTMLAnchorElement>('[data-card="dlc"] .reference');
+const dlcReference = document.querySelector<HTMLAnchorElement>('[data-card="dlc"] [data-announcement-link]');
 document.documentElement.dataset.dlcReleased = String(simulationSettings.dlcReleased);
 document.querySelectorAll<HTMLElement>("[data-release-only]").forEach((element) => {
   element.hidden = !simulationSettings.dlcReleased;

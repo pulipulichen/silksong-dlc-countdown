@@ -12,25 +12,29 @@ An animated, multilingual **unofficial fan countdown** for *Hollow Knight: Silks
 
 - **Official release date:** December 11, 2026.
 - **Exact launch time:** Not announced.
-- **Countdown convention:** The site uses 00:00 in **Australia/Adelaide** as the start-of-date boundary. This is not a claim that the DLC launches at midnight.
-- **Overdue state:** If the DLC has not been marked as released, the overdue timer begins at Adelaide midnight on December 12.
+- **Countdown deadline:** **December 12, 2026, at 00:00 Australia/Adelaide** — the instant December 11 ends. The countdown therefore covers the full December 11 calendar day; this is not a claim that the DLC launches at midnight.
+- **Overdue state:** If the DLC has not been marked as released by that deadline, the overdue timer begins at the same boundary.
 
 > The images in `demo/` are archived previews captured before the official December 11, 2026 release date was announced. They may show the previous fan-selected December 31 marker and the former year-end overdue boundary; they are not screenshots of the current live schedule.
 
 ## Countdown states
 
-1. **Sea of Sorrow countdown.** The single countdown card counts down to the announced December 11 release date.
-2. **The announced release date arrives.** At Adelaide midnight on December 11, the countdown changes to an elapsed-time display labelled to make clear that the exact launch time is still unknown. This does not automatically mark the DLC as released.
+1. **Sea of Sorrow countdown.** The single countdown card counts down through all of December 11 and reaches its deadline at Adelaide midnight as December 12 begins.
+2. **Overdue.** If the DLC has not been marked as released by that deadline, the site switches to its overdue presentation and counts up from the same boundary. This does not automatically mark the DLC as released.
 3. **Release celebration.** After verifying that the DLC is available, the maintainer can set `dlcReleased: true`, enter the actual release timestamp, and optionally link to the official announcement. The site switches to a celebration screen and counts up from the configured release instant.
-4. **Overdue.** If the DLC has not been marked as released by December 12 in Adelaide, the site switches to its playful overdue presentation and counts up from that date boundary.
 
 ## Official dates
 
 | Date | Meaning |
 | --- | --- |
-| **2026-12-11** | Team Cherry's announced Sea of Sorrow release date. The exact launch time and time zone have not been announced. The website uses 00:00 Adelaide only as a calendar boundary. |
+| **2026-12-11** | Team Cherry's announced Sea of Sorrow release date. The exact launch time and time zone have not been announced. The countdown deadline is 00:00 Adelaide time on December 12, when December 11 ends. |
 
-The release date and overdue boundary use the IANA **Australia/Adelaide** time zone, including daylight saving.
+The release date and countdown deadline use the IANA **Australia/Adelaide** time zone, including daylight saving.
+
+## Official trailers
+
+- [Original teaser](https://www.youtube.com/watch?v=qDFEeeLy6ws)
+- [Launch trailer](https://www.youtube.com/watch?v=7hj4g173FhM)
 
 ## Installable PWA (online only)
 
