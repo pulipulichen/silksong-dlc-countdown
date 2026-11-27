@@ -1,8 +1,8 @@
 {
   "id": "/silksong-dlc-countdown/",
-  "name": "Silksong DLC Countdown",
-  "short_name": "Silksong DLC",
-  "description": "Unofficial fan countdown for Hollow Knight: Silksong's Sea of Sorrow DLC.",
+  "name": "Sea of Sorrow Countdown",
+  "short_name": "Sea of Sorrow",
+  "description": "Unofficial countdown to Hollow Knight: Silksong's Sea of Sorrow DLC.",
   "start_url": "/silksong-dlc-countdown/",
   "scope": "/silksong-dlc-countdown/",
   "display": "standalone",

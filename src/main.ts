@@ -7,8 +7,6 @@ import { startSilkCursor } from "./flower-cursor";
 import { startInstallPrompt } from "./install-prompt";
 import { getInitialLocale, isLocale, texts, type Locale, type TextKey } from "./i18n";
 
-type TimerId = "dlc" | "cherry";
-
 type SimulationSettings = {
   mode: SimulationMode;
   date: string;
@@ -49,13 +47,7 @@ export function adelaideMidnight(year: number, month: number, day: number): numb
   return current;
 }
 
-const target: Record<TimerId, number> = {
-  dlc: adelaideMidnight(2026, 12, 11),
-  cherry: Date.parse("2026-11-27T23:00:00+08:00"), // November 28, 01:30 in Adelaide.
-};
-// Keep the Cherry Time card through the event's Adelaide calendar day.
-const cherryCardHideAt = adelaideMidnight(2026, 11, 29);
-const cherryCard = document.querySelector<HTMLElement>('[data-card="cherry"]');
+const dlcTarget = adelaideMidnight(2026, 12, 11);
 // If the announced December 11 release date passes without a release, start the overdue state on December 12.
 const overdueStartsAt = adelaideMidnight(2026, 12, 12);
 const overdueArt = document.querySelector<HTMLElement>(".overdue-art");
@@ -140,10 +132,7 @@ let isOverdue = currentTime() >= overdueStartsAt && !simulationSettings.dlcRelea
 let locale: Locale = getInitialLocale();
 const select = document.querySelector<HTMLSelectElement>("#locale");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const timers: Record<TimerId, HTMLElement | null> = {
-  dlc: document.querySelector('[data-timer="dlc"]'),
-  cherry: document.querySelector('[data-timer="cherry"]'),
-};
+const dlcTimer = document.querySelector<HTMLElement>('[data-timer="dlc"]');
 
 function changeDigit(element: HTMLElement | null, value: number | null): void {
   if (!element) return;
@@ -159,7 +148,6 @@ function changeDigit(element: HTMLElement | null, value: number | null): void {
 
 function update(): void {
   const now = currentTime();
-  if (cherryCard) cherryCard.hidden = simulationSettings.dlcReleased || now >= cherryCardHideAt;
   const overdue = now >= overdueStartsAt && !simulationSettings.dlcReleased;
   if (overdue !== isOverdue) {
     isOverdue = overdue;
@@ -167,11 +155,9 @@ function update(): void {
     window.dispatchEvent(new Event("silksong-theme-changed"));
   }
   const copy = texts[locale];
-  (["dlc", "cherry"] as const).forEach((id) => {
-    const timer = timers[id];
-    if (!timer) return;
-    const released = id === "dlc" && simulationSettings.dlcReleased;
-    const origin = released ? releasedAt : id === "dlc" && isOverdue ? overdueStartsAt : target[id];
+  if (dlcTimer) {
+    const released = simulationSettings.dlcReleased;
+    const origin = released ? releasedAt : isOverdue ? overdueStartsAt : dlcTarget;
     const duration = origin === null ? null : Math.floor(
       (released ? Math.max(0, now - origin) : Math.abs(now - origin)) / 1000,
     );
@@ -182,15 +168,15 @@ function update(): void {
       seconds: duration === null ? null : duration % 60,
     };
     Object.entries(values).forEach(([unit, value]) => {
-      changeDigit(timer.querySelector<HTMLElement>('[data-unit="' + unit + '"]'), value);
+      changeDigit(dlcTimer.querySelector<HTMLElement>('[data-unit="' + unit + '"]'), value);
     });
     const expired = origin !== null && now >= origin;
-    const card = timer.closest<HTMLElement>(".card");
+    const card = dlcTimer.closest<HTMLElement>(".card");
     if (card) card.dataset.expired = String(expired);
-    const status = document.querySelector<HTMLElement>('[data-status="' + id + '"]');
-    const label = released ? copy.releasedStatus : id === "dlc" && isOverdue ? copy.overdueStatus : expired ? (id === "dlc" ? copy.dlcAfter : copy.after) : copy.before;
+    const status = document.querySelector<HTMLElement>('[data-status="dlc"]');
+    const label = released ? copy.releasedStatus : isOverdue ? copy.overdueStatus : expired ? copy.dlcAfter : copy.before;
     if (status && status.textContent !== label) status.textContent = label;
-  });
+  }
 
   const clock = document.querySelector<HTMLElement>("#adelaide-clock");
   if (clock) {
@@ -224,8 +210,7 @@ function applyPresentation(): void {
     }).format(releasedAt);
   }
   if (select) { select.value = locale; select.setAttribute("aria-label", copy.language); }
-  timers.dlc?.setAttribute("aria-label", simulationSettings.dlcReleased ? copy.releasedAria : isOverdue ? copy.overdueAria : copy.dlcAria);
-  timers.cherry?.setAttribute("aria-label", copy.cherryAria);
+  dlcTimer?.setAttribute("aria-label", simulationSettings.dlcReleased ? copy.releasedAria : isOverdue ? copy.overdueAria : copy.dlcAria);
   const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
   if (description) description.content = simulationSettings.dlcReleased ? copy.releasedIntro : isOverdue ? copy.overdueIntro : copy.intro;
   const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');

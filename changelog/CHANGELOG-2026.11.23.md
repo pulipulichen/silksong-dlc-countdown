@@ -10,3 +10,7 @@
 
 ## Documentation
 - Added a bilingual documentation index linking the countdown configuration, deployment, and Google Play guides.
+
+## Removed
+- Removed the Cherry Time presentation card, its independent countdown, and related translations. The public site now presents only the Sea of Sorrow countdown.
+- Rebranded the page title, installable app, and PWA install prompt around Sea of Sorrow.
