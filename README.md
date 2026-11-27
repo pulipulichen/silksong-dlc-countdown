@@ -6,6 +6,8 @@
 
 **[Open the live website](https://pulipulichen.github.io/silksong-dlc-countdown/)**
 
+![Sea of Sorrow countdown — December 11, 2026](./demo/demo_wait_1211.png)
+
 An animated, multilingual **unofficial fan countdown** for *Hollow Knight: Silksong — Sea of Sorrow*. Team Cherry announced **December 11, 2026** as the release date for the free Sea of Sorrow expansion. The exact launch time and time zone were not announced.
 
 ## Current countdown
@@ -15,7 +17,7 @@ An animated, multilingual **unofficial fan countdown** for *Hollow Knight: Silks
 - **Countdown deadline:** **December 12, 2026, at 00:00 Australia/Adelaide** — the instant December 11 ends. The countdown therefore covers the full December 11 calendar day; this is not a claim that the DLC launches at midnight.
 - **Overdue state:** If the DLC has not been marked as released by that deadline, the overdue timer begins at the same boundary.
 
-> The images in `demo/` are archived previews captured before the official December 11, 2026 release date was announced. They may show the previous fan-selected December 31 marker and the former year-end overdue boundary; they are not screenshots of the current live schedule.
+> The new introduction image above (`demo/demo_wait_1211.png`) reflects the December 11, 2026 countdown. The other historical images in `demo/` were captured before the official December 11, 2026 release date was announced; they may show the previous fan-selected December 31 marker and the former year-end overdue boundary, and are not screenshots of the current live schedule.
 
 ## Countdown states
 
