@@ -33,12 +33,9 @@ const simulationSettings: SimulationSettings = {
 內建目標日期與相關時間界線定義於 `src/main.ts`：
 
 - Team Cherry 已公布《悲愴之海》於 **2026 年 12 月 11 日推出**。由於官方沒有公布具體開放時間或時區，倒數僅以**阿德雷德時間 00:00**作為當天開始的日期界線，不代表 DLC 會在午夜開放。
-- Cherry Time 特別發表會於 **2026 年 11 月 27 日台灣時間 23:00（UTC+8）** 舉行，對應阿德雷德 11 月 28 日 01:30。回放卡片在阿德雷德 11 月 29 日午夜隱藏。
 - 若屆時尚未將 DLC 標記為已開放，逾時計時會從 **2026 年 12 月 12 日阿德雷德午夜**開始。
 
-DLC 與隱藏卡片的時間界線透過 `adelaideMidnight` 函式建立，會依 `Australia/Adelaide` 時區及日光節約時間計算；Cherry Time 則使用明確的 UTC+8 時間戳記。修改目標日期時，也請檢查相關的卡片隱藏／逾期時間界線，以及 `src/i18n.ts` 中與日期相關的文字，確保畫面資訊一致。
-
-Team Cherry 已在 Cherry Time 公布《悲愴之海》的發售日期為 **2026 年 12 月 11 日**，但沒有公布具體開放時間或時區。因此，公開網站僅以阿德雷德午夜作為日期界線。[前往 YouTube 重看 Cherry Time](https://www.youtube.com/watch?v=M-QUgdcBpZU)。
+DLC 目標日期與逾期時間界線透過 `adelaideMidnight` 函式建立，會依 `Australia/Adelaide` 時區及日光節約時間計算。修改發售日期時，也請檢查逾期時間界線，以及 `src/i18n.ts` 中與日期相關的文字，確保單一倒數畫面資訊一致。
 
 ## 套用變更
 

@@ -1,8 +1,8 @@
 {
   "packageId": "io.github.pulipulichen.silksongdlccountdown",
   "host": "pulipulichen.github.io",
-  "name": "Silksong DLC Countdown",
-  "launcherName": "Silksong DLC",
+  "name": "Sea of Sorrow Countdown",
+  "launcherName": "Sea of Sorrow",
   "display": "standalone",
   "themeColor": "#061117",
   "themeColorDark": "#061117",
