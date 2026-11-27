@@ -50,14 +50,14 @@ export function adelaideMidnight(year: number, month: number, day: number): numb
 }
 
 const target: Record<TimerId, number> = {
-  dlc: adelaideMidnight(2026, 12, 31),
+  dlc: adelaideMidnight(2026, 12, 11),
   cherry: Date.parse("2026-11-27T23:00:00+08:00"), // November 28, 01:30 in Adelaide.
 };
 // Keep the Cherry Time card through the event's Adelaide calendar day.
 const cherryCardHideAt = adelaideMidnight(2026, 11, 29);
 const cherryCard = document.querySelector<HTMLElement>('[data-card="cherry"]');
-// The announced year ends at the next Adelaide midnight, not the start of December 31.
-const overdueStartsAt = adelaideMidnight(2027, 1, 1);
+// If the announced December 11 release date passes without a release, start the overdue state on December 12.
+const overdueStartsAt = adelaideMidnight(2026, 12, 12);
 const overdueArt = document.querySelector<HTMLElement>(".overdue-art");
 const overdueSince = document.querySelector<HTMLElement>(".overdue-since");
 
@@ -188,7 +188,7 @@ function update(): void {
     const card = timer.closest<HTMLElement>(".card");
     if (card) card.dataset.expired = String(expired);
     const status = document.querySelector<HTMLElement>('[data-status="' + id + '"]');
-    const label = released ? copy.releasedStatus : id === "dlc" && isOverdue ? copy.overdueStatus : expired ? copy.after : copy.before;
+    const label = released ? copy.releasedStatus : id === "dlc" && isOverdue ? copy.overdueStatus : expired ? (id === "dlc" ? copy.dlcAfter : copy.after) : copy.before;
     if (status && status.textContent !== label) status.textContent = label;
   });
 
