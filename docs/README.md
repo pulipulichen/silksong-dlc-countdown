@@ -11,6 +11,7 @@ Maintainer guides for this project. Each topic has an English page and a Traditi
 | Countdown dates and DLC configuration<br>倒數日期與 DLC 設定 | [English](./en_us/configuration.md) | [繁體中文](./zh_tw/configuration.md) |
 | Deployment and local testing<br>部署與本機測試 | [English](./en_us/deploy.md) | [繁體中文](./zh_tw/deploy.md) |
 | Google Play AAB configuration<br>Google Play AAB 設定 | [English](./en_us/google_play.md) | [繁體中文](./zh_tw/google_play.md) |
+| Demo screenshot history<br>Demo 畫面歷史紀錄 | [English](./en_us/demo-history.md) | [繁體中文](./zh_tw/demo-history.md) |
 
 ## What each guide covers / 各指南內容
 
@@ -43,3 +44,12 @@ Set up the upload key, build a signed Android App Bundle on GitHub Actions, and 
 - [One-time upload-key setup](./en_us/google_play.md#one-time-upload-key-setup) · [一次性上傳金鑰設定](./zh_tw/google_play.md#一次性上傳金鑰設定)
 - [Build and upload an AAB](./en_us/google_play.md#build-and-upload-an-aab) · [建置並上傳 AAB](./zh_tw/google_play.md#建置並上傳-aab)
 - [Verify the full-screen TWA](./en_us/google_play.md#verify-the-full-screen-twa) · [驗證全螢幕 TWA](./zh_tw/google_play.md#驗證全螢幕-twa)
+
+
+### Demo screenshot history / Demo 畫面歷史紀錄
+
+Browse the historical countdown layouts and simulated overdue/release screens preserved in `demo/`.
+
+瀏覽 `demo/` 中保存的歷史倒數版面，以及逾期等待／發售慶祝狀態預覽。
+
+- [Demo screenshot history](./en_us/demo-history.md) · [Demo 畫面歷史紀錄](./zh_tw/demo-history.md)
