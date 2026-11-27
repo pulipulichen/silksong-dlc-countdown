@@ -17,7 +17,7 @@ An animated, multilingual **unofficial fan countdown** for *Hollow Knight: Silks
 - **Countdown deadline:** **December 12, 2026, at 00:00 Australia/Adelaide** — the instant December 11 ends. The countdown therefore covers the full December 11 calendar day; this is not a claim that the DLC launches at midnight.
 - **Overdue state:** If the DLC has not been marked as released by that deadline, the overdue timer begins at the same boundary.
 
-> The new introduction image above (`demo/demo_wait_1211.png`) reflects the December 11, 2026 countdown. The other historical images in `demo/` were captured before the official December 11, 2026 release date was announced; they may show the previous fan-selected December 31 marker and the former year-end overdue boundary, and are not screenshots of the current live schedule.
+> The [demo screenshot history](./docs/en_us/demo-history.md) documents the earlier countdown layouts and the simulated overdue/release screens preserved in `demo/`. These images are historical records or state previews; not all of them represent the current live schedule.
 
 ## Countdown states
 
@@ -60,5 +60,6 @@ GitHub Actions generates opaque PNG installation icons from `public/favicon.svg`
 - [Countdown dates and DLC configuration](./docs/en_us/configuration.md)
 - [Deployment and local testing](./docs/en_us/deploy.md)
 - [Google Play AAB configuration](./docs/en_us/google_play.md)
+- [Demo screenshot history](./docs/en_us/demo-history.md)
 
 **Disclaimer:** This is an unofficial fan project, unaffiliated with Team Cherry.
